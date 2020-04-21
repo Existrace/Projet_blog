@@ -12,9 +12,15 @@ class modelePDO
     private static $_user = "root";
     private static $_mdp = "";
 
-    private function __construct(){
-        modelePDO::$pdo = new PDO(modelePDO::$serveur.';'.modelePDO::$_bdd, modelePDO::$_user, modelePDO::$_mdp);
-        modelePDO::$pdo->query("SET CHARACTER SET utf8");
+    private function __construct() {
+        try{
+            modelePDO::$pdo = new PDO(modelePDO::$serveur.';'.modelePDO::$_bdd, modelePDO::$_user, modelePDO::$_mdp);
+            modelePDO::$pdo->query("SET CHARACTER SET utf8");
+        }
+        catch (Exception $e){
+            die("Erreur Bdd : " . $e->getMessage());
+        }
+
     }
 
     public static function getPdo(){
