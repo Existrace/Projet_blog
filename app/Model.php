@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 <?php
 
 
-class modelePDO
+class model
 {
     /**
      * @var PDO
@@ -15,8 +14,8 @@ class modelePDO
 
     private function __construct() {
         try{
-            modelePDO::$pdo = new PDO(modelePDO::$serveur.';'.modelePDO::$_bdd, modelePDO::$_user, modelePDO::$_mdp);
-            modelePDO::$pdo->query("SET CHARACTER SET utf8");
+            model::$pdo = new PDO(model::$serveur.';'.model::$_bdd, model::$_user, model::$_mdp);
+            model::$pdo->query("SET CHARACTER SET utf8");
         }
         catch (Exception $e){
             die("Erreur Bdd : " . $e->getMessage());
@@ -25,9 +24,9 @@ class modelePDO
     }
 
     public static function getPdo(){
-        if(modelePDO::$pdo==null){
-            modelePDO::$pdo= new modelePDO();
+        if(model::$pdo==null){
+            model::$pdo= new model();
         }
-        return modelePDO::$pdo;
+        return model::$pdo;
     }
 }
