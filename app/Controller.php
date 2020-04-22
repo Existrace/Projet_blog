@@ -10,4 +10,10 @@ abstract class Controller {
         include_once(ROOT.'models/'.$model.'.php');
         $this->$model = new $model();
     }
+
+    public function render($view, $data = []) {
+        extract($data);
+        require_once(ROOT.'views/'.strtolower(get_class($this)).'/'.$view.'.php');
+
+    }
 }

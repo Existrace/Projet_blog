@@ -6,7 +6,8 @@ class PostManager extends Model
 
     public function getPosts() {
         $req = "SELECT title, Post_Content, Post_Date FROM Post";
-        return $this->_connexion->query($req);
+        $req = $this->_connexion->query($req);
+        return $req->fetchAll();
     }
 
     public function getPostById($id) {

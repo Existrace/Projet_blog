@@ -6,7 +6,8 @@ class CommentManager extends Model
 
     public function getComments() {
         $req = "SELECT Comment_Email, Comment_Content, Comment_Date, ID_post FROM comment";
-        return $this->_connexion->query($req);
+        $req = $this->_connexion->query($req);
+        return $req->fetchAll();
     }
 
     public function getCommentById($id) {

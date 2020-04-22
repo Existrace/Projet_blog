@@ -12,9 +12,9 @@ abstract class Model
     private $_user = "root";
     private $_password = "";
 
-    // Propriétés contenant les informations de requêtes
+    /*// Propriétés contenant les informations de requêtes
     public $table;
-    public $id;
+    public $id;*/
 
     public function __construct() {
         try{
