@@ -3,8 +3,8 @@
 define('ROOT', str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']));
 
 // Appelle le modèle et le contrôleur principal
-require_once('app/Model.php');
-require_once('app/Controller.php');
+require_once(ROOT.'app/Model.php');
+require_once(ROOT.'app/Controller.php');
 
 // Séparation des paramètres pour les mettre dans le tableau $params
 $param = explode('/', $_GET['p']);
@@ -34,14 +34,14 @@ if($param[0] != "") {
         echo "La page recherchée n'existe pas";
     }
 }else {
-    /*// Si aucun paramètre n'est défini
+    // Si aucun paramètre n'est défini
     // On appelle le contrôleur par défaut
-    require_once(ROOT.'controllers/Main.php');
+    require_once(ROOT.'controllers/Post.php');
 
     // Instantiation du contrôleur
-    $controller = new Main();
+    $controller = new Post();
 
-    $controller->index();*/
+    $controller->index();
 
 }
 
