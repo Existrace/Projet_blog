@@ -5,7 +5,7 @@ class PostManager extends Model
 {
 
     public function getPosts() {
-        $req = "SELECT title, Post_Content, Post_Date FROM Post";
+        $req = "SELECT title, Post_Content, Post_Date FROM Post ORDER BY Post_Date DESC";
         $req = $this->_connexion->query($req);
         return $req->fetchAll();
     }

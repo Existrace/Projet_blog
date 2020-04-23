@@ -11,6 +11,9 @@ abstract class Controller {
         $this->$model = new $model();
     }
 
+    /*
+     * Fonction permettant la rendu des vues
+     */
     public function render($view, $data = []) {
         extract($data);
         require_once(ROOT.'views/'.strtolower(get_class($this)).'/'.$view.'.php');

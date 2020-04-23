@@ -5,3 +5,15 @@
     bottom: 0;
     width: 100%;
 }
+
+/*
+@font-face {
+    font-family: "FunSized";
+    src: url("/public/fonts/FunSized.ttf");
+}
+
+.font_special {
+    font-weight: bold;
+    font-family: 'FunSized', serif;
+    font-size: 50px;
+}*/

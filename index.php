@@ -26,8 +26,11 @@ if($param[0] != "") {
     $controller = new $controller();
 
     if(method_exists($controller, $action)){
+        unset($param[0]);
+        unset($param[1]);
         // On appelle la méthode
-        $controller->$action();
+        call_user_func_array([$controller, $action], $param);
+        //$controller->$action();
     }else {
         // On envoie le code réponse 404
         http_response_code(404);
