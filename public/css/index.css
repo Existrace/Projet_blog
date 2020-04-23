@@ -6,6 +6,15 @@
     width: 100%;
 }
 
+.title_post {
+    color: black;
+}
+
+.title_post :hover {
+    color: #546e7a;
+}
+
+
 /*
 @font-face {
     font-family: "FunSized";

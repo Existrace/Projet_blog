@@ -19,12 +19,10 @@
                             <div class="card black-text" style="background-image: url('/public/images/mountain-4021090_1280.jpg');
          background-repeat: no-repeat; background-size: cover">
                                 <div class="card-content">
-                                    <span class="card-title center"> <?= $post['title'] ?> </span>
+                                    <span class="card-title center title_post" >
+                                        <a class="title_post" href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a></span>
                                     <hr/>
                                     <p> <?= $post['Post_Date'] ?> </p>
-                                </div>
-                                <div class="card-action">
-                                    <a href="#">This is a link</a>
                                 </div>
                             </div>
                         </div>

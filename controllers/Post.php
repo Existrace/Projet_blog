@@ -20,12 +20,18 @@ class Post extends Controller {
     /*
      * Fonction affichant un billet de blog selon son id
      * */
-    public function show($id) {
+    public function show($slug) {
 
         $postManager = new PostManager();
+        $commentManager = new CommentManager();
         // Récupération du billet en paramètre (id)
-        $post = $postManager->getPostById($id);
 
-        $this->render('show', compact("post"));
+        $post = $postManager->getPostBySlug($slug);
+        $id =  $post["ID_post"];
+
+        // Récupère les commentaires du post
+        $comments = $commentManager->getComments($id);
+
+        $this->render('show', compact("post", "comments"));
     }
 }

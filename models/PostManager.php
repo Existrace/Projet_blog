@@ -5,14 +5,23 @@ class PostManager extends Model
 {
 
     public function getPosts() {
-        $req = "SELECT title, Post_Content, Post_Date FROM Post ORDER BY Post_Date DESC";
+        $req = "SELECT * FROM Post ORDER BY Post_Date DESC";
         $req = $this->_connexion->query($req);
         return $req->fetchAll();
     }
 
     public function getPostById($id) {
-        $req = $this->_connexion->prepare("SELECT title, Post_Content, Post_Date FROM post where ID_post = ?");
+        $req = $this->_connexion->prepare("SELECT * FROM post where ID_post = ?");
         $req->execute(array($id));
+        return $req->fetch();
+    }
+
+    /*
+     * @param string $slug
+     */
+    public function getPostBySlug($slug) {
+        $req = $this->_connexion->prepare("SELECT * FROM post where slug = ?");
+        $req->execute(array($slug));
         return $req->fetch();
     }
 
