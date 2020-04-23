@@ -1,15 +1,10 @@
-<?php include("views/entete.html"); ?>
-
-
 <div class="container">
     <div class="section">
 
         <!--   Page Section  -->
         <div class="row">
-
             <div class="col m12">
-
-                <div class="card">
+                <div class="card" style="opacity: 0.85;">
                     <div class="center">
                         <span class="card-title">
                             <?php /** @var PostManager $post */ ?>
@@ -21,15 +16,38 @@
                         <p class="black-text"> Publié par Admin le <?= $post['Post_Date'] ?> </p><br>
                         <p> <?= $post['Post_Content'] ?></p>
 
-
                         <hr>
-                        <p class="subheader"> Commentaires</p> <br>
+                        <p class="subheader"> Commentaires</p>
                         <!-- Formulaire de création d'un commentaire -->
+                        <br/>
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <form action="show.php" method="post">
+                                        <div class="input-field col s6">
+                                            <label for="email">E-mail</label>
+                                            <input id="email" type="email" name="email" class="validate" placeholder="Ecrivez votre email...">
+                                        </div>
+                                        <div class="input-field col s8">
+                                            <label for="textarea">Votre commentaire</label>
+                                            <textarea id="textarea" name="comment" class="materialize-textarea" placeholder="Ecrivez votre commentaire...">
+                                            </textarea>
+                                        </div>
+                                        <div class="input-field col s8">
+                                            <button class="btn waves-effect waves-light" id="submit" type="submit" name="submit">Submit
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </form>
+                        </div>
+
                         <?php /** @var CommentManager $comments */
                         foreach ($comments as $comment): ?>
                             <div class="card tiny">
                                 <div class="card-content">
-                                    <span class="card-title">Soumis par  <?= $comment['Comment_Email'] ?>  Le  <?= $comment['Comment_Date'] ?>  </span>
+                                    <p>Soumis par <strong><?= $comment['Comment_Email'] ?></strong>,
+                                        le <?= $comment['Comment_Date'] ?>  </p>
                                     <p>  <?= $comment['Comment_Content'] ?> </p>
                                 </div>
                             </div>
@@ -37,7 +55,8 @@
 
                         <hr/>
                         <p>
-                            <a class="black-text text-lighten-3"  href="/post/index"> <i class="tiny material-icons">keyboard_return</i> Retour aux articles </a>
+                            <a class="black-text text-lighten-3" href="/post/index"> <i class="tiny material-icons">keyboard_return</i>
+                                Retour aux articles </a>
                         </p>
                     </div>
 

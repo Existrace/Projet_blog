@@ -32,6 +32,11 @@ class Post extends Controller {
         // Récupère les commentaires du post
         $comments = $commentManager->getComments($id);
 
+        // Essaye de récupérer les données du formulaire de commentaire
+        if (isset($_POST["submit"])) {
+            echo "truc";
+        }
+
         $this->render('show', compact("post", "comments"));
     }
 }

@@ -1,9 +1,9 @@
 /*  FOOTER */
 
 .footer {
-    position: absolute;
+    /*position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 100%;*/
 }
 
 .title_post {
@@ -12,6 +12,11 @@
 
 .title_post :hover {
     color: #546e7a;
+}
+
+body {
+    background-image: url("/public/images/glacier-bay-80643_1920.jpg");
+    background-size: cover;
 }
 
 

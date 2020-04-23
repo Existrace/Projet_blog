@@ -14,14 +14,6 @@
 
 <body>
 
-<!-- NAVBAR-->
-<nav class="navbar-fixed">
-    <div class="nav-wrapper blue-grey" style="background-image: url('/public/images/winter-4830285_1280.jpg');
-         background-repeat: no-repeat; background-size: cover">
-
-    </div>
-</nav>
-
 <div>
     <h2 class="center" style="font-weight: bold;
         font-family: 'FunSized', serif;">
@@ -33,5 +25,17 @@
     </h4>
 </div>
 
+<main>
 
+    <?= /** @var string $content */
+    $content ?>
+</main>
+
+<!-- Trouver un footer -->
+<script type="text/javascript" src="/public/js/materialize.js"></script>
+<script type="text/javascript" src="/public/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/public/js/jsform.js"></script>
+
+
+</body>
 
