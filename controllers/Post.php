@@ -32,11 +32,23 @@ class Post extends Controller {
         // Récupère les commentaires du post
         $comments = $commentManager->getComments($id);
 
-        // Essaye de récupérer les données du formulaire de commentaire
-        if (isset($_POST["submit"])) {
-            echo "truc";
+        if (isset($_POST['submit']))
+        {
+            if (isset($_POST['email'], $_POST['content'])) {
+                $email = $_POST['email'];
+                $content = $_POST['content'];
+                // Création d'un commentaire
+                $commentManager->createComment($email, $content , $id);
+            }
         }
 
         $this->render('show', compact("post", "comments"));
     }
+
+    /*public function addComment($email, $content, $idPost) {
+
+        $commentManager = new CommentManager();
+
+        $comment = $commentManager->createComment($email, $content, $idPost);
+    }*/
 }

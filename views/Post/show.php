@@ -23,14 +23,15 @@
                         <div class="row">
                             <form class="col s12">
                                 <div class="row">
-                                    <form action="show.php" method="post">
+                                    <form action="index.php?action=show" method="post">
                                         <div class="input-field col s6">
                                             <label for="email">E-mail</label>
                                             <input id="email" type="email" name="email" class="validate" placeholder="Ecrivez votre email...">
                                         </div>
                                         <div class="input-field col s8">
                                             <label for="textarea">Votre commentaire</label>
-                                            <textarea id="textarea" name="comment" class="materialize-textarea" placeholder="Ecrivez votre commentaire...">
+                                            <textarea id="textarea" name="content" class="materialize-textarea" required
+                                                      placeholder="Ecrivez votre commentaire...">
                                             </textarea>
                                         </div>
                                         <div class="input-field col s8">

@@ -25,5 +25,10 @@
         <?php endforeach; ?>
     </div>
 
+    <div class="row center">
+        <a class="title_post"
+           href="/admin"> Partie administration</a>
+    </class>
+
 </div>
 
