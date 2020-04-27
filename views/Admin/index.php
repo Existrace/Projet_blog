@@ -13,22 +13,16 @@
                     <div class="card-content">
 
                         <div class="row">
-                            <form class="col s12 m12">
-                                <div class="row">
-                                    <form action="" method="post">
-                                        <div class="input-field col s6">
-                                            <input type="text" name="admin" class="validate" placeholder="Nom d'administrateur" ">
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input type="password" name="passw" class="validate" placeholder="Mot de passe" ">
-                                        </div>
-                                        <div class="input-field col s8">
-                                            <button class="btn waves-effect waves-light" name="submit" type="submit">
-                                                Envoyer
-                                            </button>
-                                        </div>
-                                    </form>
+                            <form action="" method="post">
+                                <div>
+                                    Nom d'utilisateur
+                                    <input type="text" name = 'admin'/>
                                 </div>
+                                <div>
+                                    Mot de passe
+                                    <input type="password" name = 'pass'/>
+                                </div>
+                                <input type="submit" value = 'Se connecter'/>
                             </form>
                         </div>
 

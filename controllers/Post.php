@@ -4,6 +4,7 @@
 require_once("models/PostManager.php");
 require_once("models/CommentManager.php");
 
+
 class Post extends Controller {
 
     /**
@@ -32,7 +33,9 @@ class Post extends Controller {
         // Récupère les commentaires du post
         $comments = $commentManager->getComments($id);
 
-        if (isset($_POST['submit']))
+        $post_data = file_get_contents('php://input');
+
+        /*if (isset($_POST['submit']))
         {
             if (isset($_POST['email'], $_POST['content'])) {
                 $email = $_POST['email'];
@@ -40,7 +43,7 @@ class Post extends Controller {
                 // Création d'un commentaire
                 $commentManager->createComment($email, $content , $id);
             }
-        }
+        }*/
 
         $this->render('show', compact("post", "comments"));
     }

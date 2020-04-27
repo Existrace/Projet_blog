@@ -7,13 +7,14 @@
                 <div class="card" style="opacity: 0.85;">
                     <div class="center">
                         <span class="card-title">
-                            Espace administrateur
+                            Connexion administrateur
                         </span>
                     </div>
                     <div class="card-content">
 
-
-
+                          <textarea>
+                            Welcome to TinyMCE!
+                            </textarea>
 
                         <hr/>
                         <p>
@@ -29,3 +30,13 @@
 
     </div>
 </div>
+
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+    });
+</script>

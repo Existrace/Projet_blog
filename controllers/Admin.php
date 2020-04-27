@@ -9,14 +9,10 @@ class Admin extends Controller
         // Ici, connexion administrateur
         // Essai récupération données formulaire
 
-        var_dump($_POST);
-        var_dump($_POST['admin']);
-
-
-        if (isset($_POST['submit'])) {
-            echo "Yes";
-        }else{
-            echo "Nope";
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['admin'])){
+            echo "Eureka !";
+            echo $_POST['admin'];
+            echo $_POST['pass'];
         }
 
         $this->render('index');
@@ -24,7 +20,7 @@ class Admin extends Controller
 
     public function create() {
 
-        
+
         $this->render('create');
     }
 }
