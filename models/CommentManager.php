@@ -10,11 +10,9 @@ class CommentManager extends Model
         return $req->fetchAll();
     }
 
-    public function getCommentById($id) {
-
-        $req = $this->_connexion->prepare("SELECT ID_comment, Comment_Email, Comment_Content, Comment_Date, ID_post 
-        FROM comment where ID_comment = ?");
-        $req->execute(array($id));
+    public function countComments($id_post) {
+        $req = "SELECT COUNT(*) FROM comment WHERE ID_post = $id_post";
+        $req = $this->_connexion->query($req);
         return $req->fetch();
     }
 
@@ -22,15 +20,8 @@ class CommentManager extends Model
         $comments = $this->_connexion->prepare("INSERT INTO comment ( Comment_Email, Comment_Content, Comment_Date, ID_post)
         VALUES ('$email', '$content', NOW(), '$idPost')");
         return $comments->execute(array($email, $content, $idPost));
-
-
     }
 
-    public function updateComment($id, $content, $date)  {
-        $req = "UPDATE comment set 
-        Comment_Content = '$content', Comment_Date = '$date' where ID_post = '$id'";
-        $this->_connexion->exec($req);
-    }
 
     public function deleteComment($id) {
         $req = "DELETE FROM comment where ID_comment = '$id'";

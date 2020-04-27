@@ -1,22 +1,32 @@
 <?php
 
-
+require_once("models/AdminUserManager.php");
 
 class Admin extends Controller
 {
     public function index() {
 
-        // Ici, connexion administrateur
-        // Essai récupération données formulaire
-
+        // Connexion administrateur
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['admin'])){
-            echo "Eureka !";
-            echo $_POST['admin'];
-            echo $_POST['pass'];
+            $admin = $_POST['admin'];
+            $pass = $_POST['pass'];
+
+            $adminUserManager = new AdminUserManager();
+
+            // Réussite connexion
+            if($adminUserManager->getUser($admin, $pass)){
+                echo "Connexion réussie";
+                $this->render('create');
+
+            }else {
+                ECHO "Echec authentification";
+            }
+
         }
 
         $this->render('index');
     }
+
 
     public function create() {
 

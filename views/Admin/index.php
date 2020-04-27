@@ -1,6 +1,5 @@
 <div class="container">
     <div class="section">
-
         <!--   Page Section  -->
         <div class="row">
             <div class="col m12">
@@ -11,21 +10,24 @@
                         </span>
                     </div>
                     <div class="card-content">
-
                         <div class="row">
                             <form action="" method="post">
-                                <div>
+                                <div class="input-field col m6 s12">
                                     Nom d'utilisateur
-                                    <input type="text" name = 'admin'/>
+                                    <input type="text" name='admin'/>
                                 </div>
-                                <div>
+                                <div class="input-field col m6 s12">
                                     Mot de passe
-                                    <input type="password" name = 'pass'/>
+                                    <input type="password" name='pass'/>
                                 </div>
-                                <input type="submit" value = 'Se connecter'/>
+                                <div class="col m12 s12 center">
+                                    <button class="btn waves-effect waves-light blue-grey" type="submit" name="action">
+                                        Se connecter
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
                             </form>
                         </div>
-
 
                         <hr/>
                         <p>

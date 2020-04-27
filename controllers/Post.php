@@ -12,6 +12,7 @@ class Post extends Controller {
      */
     public function index() {
         $postManager = new PostManager();
+
         // Récupération des billets de blog
         $posts = $postManager->getPosts();
 
@@ -30,28 +31,19 @@ class Post extends Controller {
         $post = $postManager->getPostBySlug($slug);
         $id =  $post["ID_post"];
 
-        // Récupère les commentaires du post
+        // Récupère les commentaires du post concerné
         $comments = $commentManager->getComments($id);
 
-        $post_data = file_get_contents('php://input');
-
-        /*if (isset($_POST['submit']))
-        {
-            if (isset($_POST['email'], $_POST['content'])) {
-                $email = $_POST['email'];
-                $content = $_POST['content'];
-                // Création d'un commentaire
-                $commentManager->createComment($email, $content , $id);
-            }
-        }*/
+        // Récupération des données pour la création d'un commentaire
+        if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['content'])){
+            $email = $_POST['email'];
+            $content = $_POST['content'];
+            $commentManager->createComment($email, $content , $id);
+            $comments = $commentManager->getComments($id);
+            $this->render('show', compact("post", "comments"));
+        }
 
         $this->render('show', compact("post", "comments"));
     }
 
-    /*public function addComment($email, $content, $idPost) {
-
-        $commentManager = new CommentManager();
-
-        $comment = $commentManager->createComment($email, $content, $idPost);
-    }*/
 }

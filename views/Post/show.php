@@ -21,26 +21,24 @@
                         <!-- Formulaire de création d'un commentaire -->
                         <br/>
                         <div class="row">
-                            <form class="col s12">
-                                <div class="row">
-                                    <form action="index.php?action=show" method="post">
-                                        <div class="input-field col s6">
-                                            <label for="email">E-mail</label>
-                                            <input id="email" type="email" name="email" class="validate" placeholder="Ecrivez votre email...">
-                                        </div>
-                                        <div class="input-field col s8">
-                                            <label for="textarea">Votre commentaire</label>
-                                            <textarea id="textarea" name="content" class="materialize-textarea" required
-                                                      placeholder="Ecrivez votre commentaire...">
-                                            </textarea>
-                                        </div>
-                                        <div class="input-field col s8">
-                                            <button class="btn waves-effect waves-light" id="submit" type="submit" name="submit">Submit
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </form>
+                            <div class="col s12">
+                                <form action="" method="post">
+                                    <div class="input-field col m6 s12">
+                                        Veuillez renseigner votre e-mail*
+                                        <input type="text" name='email'/>
+                                    </div>
+                                    <div class="input-field col m7 s12">
+                                        Commentaire
+                                       <textarea class="materialize-textarea" name="content"></textarea>
+                                    </div>
+                                    <div class="col m12 s12">
+                                        <button class="btn waves-effect waves-light blue-grey" type="submit" name="submit">
+                                            Soumettre
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                         <?php /** @var CommentManager $comments */
