@@ -26,11 +26,27 @@ class PostManager extends Model
     }
 
 
-    public function createPost($title, $content, $date, $author) {
-        $req = $this->_connexion->prepare
+    public function createPost($title, $content, $idAuthor, $slug) {
+        /*$req = $this->_connexion->prepare
         ("INSERT INTO post (title, post_content, post_date, id_admin)
         VALUES ('$title', '$content', '$date', '$author')");
-        $this->_connexion->exec($req);
+        $this->_connexion->exec($req);*/
+
+        $sql = "INSERT INTO post (title, Post_Content, Post_Date, ID_Admin, slug)
+        VALUES (:title, :content, NOW(), :idadmin, :slug)";
+
+        $req = $this->_connexion->prepare($sql);
+
+        $req->bindValue(':title', $title);
+        $req->bindValue(':content', $content);
+        $req->bindValue(':idadmin', $idAuthor);
+        $req->bindValue(':slug', $slug);
+
+        $inserted = $req->execute();
+
+        if(!$inserted){
+            echo "Erreur création" . $this->_connexion->errorInfo();
+        }
     }
 
 

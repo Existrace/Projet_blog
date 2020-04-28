@@ -32,7 +32,8 @@
                         <hr/>
                         <p>
                             <a class="black-text text-lighten-3" href="/post/index"> <i class="tiny material-icons">keyboard_return</i>
-                                Retour aux articles </a>
+                                Retour aux articles
+                            </a>
                         </p>
                     </div>
 

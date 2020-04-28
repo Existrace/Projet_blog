@@ -25,12 +25,13 @@
                                     <div class="col m12 s12 l12">
                                         <div class="card black-text">
                                             <div class="card-content">
-                            <span class="card-title center title_post">
-                                <a class="title_post"
-                                   href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
-                            </span>
+                                                <p><?= $post['Post_Date'] ?> </p>
+                                                <span class="card-title center title_post">
+                                                    <a class="title_post"
+                                                      href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
+                                                </span>
                                                 <hr/>
-                                                <p> <?= $post['Post_Date'] ?> </p>
+
                                             </div>
                                         </div>
                                     </div>
@@ -38,9 +39,8 @@
                             <?php endforeach; ?>
                         </div>
 
-
                         <div>
-                            <a href="create"> Créer un nouvel article</a>
+                            <h5><a href="create"> Créer un nouvel article</a></h5>
                         </div>
 
                     </div>

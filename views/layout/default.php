@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="/public/css/materialize.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/index.css"/>
-    <script src="https://cdn.tiny.cloud/1/am54fcpyuc4bpu46hsflv5m1qfkk5c86hz8e6zkz68am5mfc/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/svt8v3ibfujxndf9ncnxnnzi2x0g484y1e9uv1z4gp09g2ml/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 </head>
 
 <body>
-
+<?php unset($_POST); ?>
 <div>
     <h2 class="center" style="font-weight: bold;
         font-family: 'FunSized', serif;">

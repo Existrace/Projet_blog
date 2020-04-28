@@ -17,6 +17,12 @@ class AdminUserManager extends Model
             }else{
                 return false;
             }
+    }
 
+    public function getIdUser($username) {
+        $req = $this->_connexion->prepare("SELECT ID_Admin FROM adminuser WHERE Username = :username");
+        $req->bindValue(':username', $username);
+        $req->execute();
+        return $req->fetch();
     }
 }
