@@ -11,12 +11,15 @@ class CommentManager extends Model
         return $req->fetchAll();
     }
 
-    public function countComments($id_post)
+    public function getAllComments()
     {
-        $req = "SELECT COUNT(*) FROM comment WHERE ID_post = $id_post";
+        $req = "SELECT ID_comment, Comment_Email, Comment_Content, Comment_Date, flag_reporting, title 
+        FROM comment
+        INNER JOIN post ON comment.ID_post = post.ID_post ORDER BY flag_reporting DESC, title";
         $req = $this->_connexion->query($req);
-        return $req->fetch();
+        return $req->fetchAll();
     }
+
 
     public function createComment($email, $content, $idPost)
     {
@@ -36,6 +39,12 @@ class CommentManager extends Model
         }
     }
 
+    public function countComments($id_post)
+    {
+        $req = "SELECT COUNT(*) FROM comment WHERE ID_post = $id_post";
+        $req = $this->_connexion->query($req);
+        return $req->fetch();
+    }
 
     public function deleteComment($id)
     {

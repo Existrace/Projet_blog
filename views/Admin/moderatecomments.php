@@ -12,41 +12,41 @@
                         </span>
                     </div>
                     <div class="card-content center">
-
-                        <p>Ici vous pouvez gérer vos article et modérer les commentaires</p>
-
-                        <div>
-                            <h5><a href="moderatecomments"> Modérer les commentaires</a></h5>
-                        </div>
-
-                        <hr/>
-
-                        <h5> Voici les articles publiés </h5>
-
+                        <h5> Gestion des commentaires </h5>
                         <div class="container">
                             <!-- Affichage des articles -->
-                            <?php /** @var PostManager $posts */
-                            foreach ($posts as $post): ?>
+                            <?php /** @var array $comments */
+                            foreach ($comments as $comment): ?>
                                 <div class="row" style="opacity: 0.79;">
                                     <div class="col m12 s12 l12">
                                         <div class="card black-text">
                                             <div class="card-content">
-                                                <p><?= $post['Post_Date'] ?> </p>
-                                                <span class="card-title center title_post">
-                                                    <a class="title_post"
-                                                      href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
+                                                <!--<p><?/*= $comment['Post_Date'] */?> </p>-->
+                                                <span class="center title_post">
+                                                    Soumis par <strong><?= $comment['Comment_Email'] ?></strong>, le <?= $comment['Comment_Date'] ?><br/>
+                                                    Article concerné : <strong><?= $comment['title'] ?></strong>
                                                 </span>
                                                 <hr/>
-
+                                                <p>
+                                                    <?= $comment['Comment_Content'] ?>
+                                                </p>
+                                                <p class="red-text">
+                                                    <?php if ($comment['flag_reporting'] == 1) {
+                                                        echo "Ce commentaire a été signalé";
+                                                    }
+                                                    ?>
+                                                </p>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-                        </div>
-
-                        <div>
-                            <h5><a href="create"> Créer un nouvel article</a></h5>
+                            <p>
+                                <a class="black-text text-lighten-3" href="index"> <i class="tiny material-icons">keyboard_return</i>
+                                    Retour à l'accueil administrateur </a>
+                            </p>
                         </div>
                     </div>
                 </div>

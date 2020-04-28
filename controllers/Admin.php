@@ -2,11 +2,11 @@
 
 require_once("models/AdminUserManager.php");
 require_once("models/PostManager.php");
+require_once("models/CommentManager.php");
 require_once("Services/Miscellaneous.php");
 
 class Admin extends Controller
 {
-
     public function login()
     {
         // Connexion administrateur
@@ -78,8 +78,25 @@ class Admin extends Controller
             // Sinon, interdire l'accès à la page
             $this->render('errorsession');
         }
-
     }
+
+    public function moderatecomments() {
+
+        // Vérifier si un administrateur est connecté
+        if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
+
+            // Récupération des données pour la création d'un article
+            $commentManager = new CommentManager();
+            $comments = $commentManager->getAllComments();
+
+
+            $this->render('moderatecomments', ['idents' => $_SESSION, 'comments' => $comments]);
+        } else {
+            // Sinon, interdire l'accès à la page
+            $this->render('errorsession');
+        }
+    }
+
 
     public function logout()
     {

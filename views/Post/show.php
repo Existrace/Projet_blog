@@ -29,10 +29,11 @@
                                     </div>
                                     <div class="input-field col m7 s12">
                                         Commentaire
-                                       <textarea class="materialize-textarea" name="content"></textarea>
+                                        <textarea class="materialize-textarea" name="content"></textarea>
                                     </div>
                                     <div class="col m12 s12">
-                                        <button class="btn waves-effect waves-light blue-grey" type="submit" name="submit">
+                                        <button class="btn waves-effect waves-light blue-grey" type="submit"
+                                                name="submit">
                                             Soumettre
                                             <i class="material-icons right">send</i>
                                         </button>
@@ -47,7 +48,13 @@
                                 <div class="card-content">
                                     <p>Soumis par <strong><?= $comment['Comment_Email'] ?></strong>,
                                         le <?= $comment['Comment_Date'] ?>  </p>
-                                    <p>  <?= $comment['Comment_Content'] ?> </p>
+                                    <p>  <?= $comment['Comment_Content'] ?></p>
+                                    <p class="red-text">
+                                        <?php if ($comment['flag_reporting'] == 1) {
+                                            echo "Ce commentaire a été signalé";
+                                        }
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -58,11 +65,8 @@
                                 Retour aux articles </a>
                         </p>
                     </div>
-
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
