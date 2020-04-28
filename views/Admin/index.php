@@ -5,35 +5,44 @@
             <div class="col m12">
                 <div class="card" style="opacity: 0.85;">
                     <div class="center">
-                        <span class="card-title">
-                            Connexion administrateur
+                        <span class="card-title center">
+                            Bienvenue, <strong>
+                                <?= /** @var array $idents */
+                                $idents['login'] ?></strong> (administrateur)
                         </span>
                     </div>
-                    <div class="card-content">
-                        <div class="row">
-                            <form action="" method="post">
-                                <div class="input-field col m6 s12">
-                                    Nom d'utilisateur
-                                    <input type="text" name='admin'/>
+                    <div class="card-content center">
+
+                        <p>Ici vous pouvez gérer vos article et modérer les commentaires</p>
+
+                        <h5> Voici les articles publiés </h5>
+
+                        <div class="container">
+                            <!-- Affichage des articles -->
+                            <?php /** @var PostManager $posts */
+                            foreach ($posts as $post): ?>
+                                <div class="row" style="opacity: 0.79;">
+                                    <div class="col m12 s12 l12">
+                                        <div class="card black-text">
+                                            <div class="card-content">
+                            <span class="card-title center title_post">
+                                <a class="title_post"
+                                   href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
+                            </span>
+                                                <hr/>
+                                                <p> <?= $post['Post_Date'] ?> </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="input-field col m6 s12">
-                                    Mot de passe
-                                    <input type="password" name='pass'/>
-                                </div>
-                                <div class="col m12 s12 center">
-                                    <button class="btn waves-effect waves-light blue-grey" type="submit" name="action">
-                                        Se connecter
-                                        <i class="material-icons right">send</i>
-                                    </button>
-                                </div>
-                            </form>
+                            <?php endforeach; ?>
                         </div>
 
-                        <hr/>
-                        <p>
-                            <a class="black-text text-lighten-3" href="/post/index"> <i class="tiny material-icons">keyboard_return</i>
-                                Retour aux articles </a>
-                        </p>
+
+                        <div>
+                            <a href="create"> Créer un nouvel article</a>
+                        </div>
+
                     </div>
 
                 </div>
@@ -42,4 +51,7 @@
         </div>
 
     </div>
+    <!--<div class="center">
+        <a class="waves-effect waves-light blue-grey btn" href="logout"><i class="material-icons right">directions_run</i>Se déconnecter</a>
+    </div>-->
 </div>

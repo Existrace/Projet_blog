@@ -6,6 +6,8 @@ define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 require_once(ROOT . 'app/Model.php');
 require_once(ROOT . 'app/Controller.php');
 
+session_start();
+
 // Séparation des paramètres pour les mettre dans le tableau $params
 $param = explode('/', $_GET['p']);
 
@@ -24,10 +26,6 @@ if ($param[0] != "") {
 
     // Instanciation du contrôleur
     $controller = new $controller();
-
-    /*if(isset($_POST['email']) && isset($_POST['comment'])) {
-        $controller->show($_POST['email'],$_POST['comment']);
-    }*/
 
     if (method_exists($controller, $action)) {
         unset($param[0]);
