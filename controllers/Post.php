@@ -9,12 +9,20 @@ class Post extends Controller {
 
     /**
      * Fonction affichant tous les billets deblog
+     * @param bool $logout
      */
-    public function index() {
+    public function index($logout = false) {
         $postManager = new PostManager();
 
         // Récupération des billets de blog
         $posts = $postManager->getPosts();
+
+        // Gère la déconnexion
+        if($logout != false) {
+            session_unset ();
+            // Destruction de la session
+            session_destroy ();
+        }
 
         $this->render('index', ['posts' => $posts]);
     }

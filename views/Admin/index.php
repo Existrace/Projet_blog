@@ -40,8 +40,11 @@
                                                       href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
                                                 </span>
                                                 <hr/>
-                                                <a class="title_post"
+                                                <a
                                                    href="/admin/update/<?= $post['ID_post'] ?>"> Modifier</a>
+                                                |
+                                                <a
+                                                   href="/admin/index/<?= $post['ID_post'] ?>"> Supprimer</a>
                                             </div>
                                         </div>
                                     </div>
@@ -51,15 +54,12 @@
 
                         <hr/>
                         <div class="center" style="padding: 15px">
-                            <a class="link_stylised" href="/post/index" class="more-link">Retourner à l'accueil du site</a>
+                            <a class="link_stylised" href="/post/index/logout">Se déconnecter</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--<div class="center">
-        <a class="waves-effect waves-light blue-grey btn" href="logout"><i class="material-icons right">directions_run</i>Se déconnecter</a>
-    </div>-->
 
 </div>

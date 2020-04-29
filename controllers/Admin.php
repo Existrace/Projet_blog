@@ -34,7 +34,7 @@ class Admin extends Controller
     }
 
 
-    public function index()
+    public function index($ID_post = null)
     {
         // Vérifier si un administrateur est connecté
         if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
@@ -42,6 +42,13 @@ class Admin extends Controller
             $postManager = new PostManager();
             // Récupération et affichage des articles dans la vue
             $posts = $postManager->getPosts();
+
+            // Gestion suppression d'un post
+            if ($ID_post != null) {
+                // Suppression commentaire
+                $postManager->deletePost($ID_post);
+                $this->index();
+            }
 
             $this->render('index', ['idents' => $_SESSION, 'posts' => $posts]);
         } else {
@@ -135,12 +142,4 @@ class Admin extends Controller
         }
     }
 
-    public function logout()
-    {
-        /* session_unset ();
-         // Destruction de la session
-         session_destroy ();
-
-         $this->index();*/
-    }
 }

@@ -29,7 +29,7 @@
     </div>
 
     <div class="row center">
-        <a class="title_post"
+        <a class="link_stylised"
            href="/admin/login"> Partie administration</a>
     </class>
 
