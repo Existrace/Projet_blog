@@ -48,8 +48,7 @@ class PostManager extends Model
 
 
     public function updatePost($id, $title, $content, $slug)  {
-        /*$req = "UPDATE post set title = '$title', Post_Content = '$content' where ID_post = '$id'";
-        $this->_connexion->exec($req);*/
+
         $sql = "UPDATE post set title = :title, Post_Content = :content, slug = :slug  where ID_post = :id";
 
         $req = $this->_connexion->prepare($sql);

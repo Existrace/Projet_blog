@@ -15,8 +15,11 @@
 
                         <p>Ici vous pouvez gérer vos article et modérer les commentaires</p>
 
-                        <div>
-                            <h5><a href="moderatecomments"> Modérer les commentaires</a></h5>
+                        <div style="padding: 15px">
+                            <a class="link_stylised" href="moderatecomments"> Modérer les commentaires</a>
+                        </div>
+                        <div style="padding: 15px">
+                            <a class="link_stylised" href="create"> Création d'un nouvel article</a>
                         </div>
 
                         <hr/>
@@ -46,12 +49,9 @@
                             <?php endforeach; ?>
                         </div>
 
-                        <div>
-                            <h5><a href="create"> Créer un nouvel article</a></h5>
-                        </div>
                         <hr/>
-                        <div clas="center">
-                            <a href="/post/index" class="more-link">Retourner à l'accueil du site</a>
+                        <div class="center" style="padding: 15px">
+                            <a class="link_stylised" href="/post/index" class="more-link">Retourner à l'accueil du site</a>
                         </div>
                     </div>
                 </div>

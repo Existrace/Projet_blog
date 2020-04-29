@@ -22,7 +22,7 @@ class Post extends Controller {
     /*
      * Fonction affichant un billet de blog selon son id
      * */
-    public function show($slug) {
+    public function show($slug, $ID_comment = null) {
 
         $postManager = new PostManager();
         $commentManager = new CommentManager();
@@ -33,6 +33,13 @@ class Post extends Controller {
 
         // Récupère les commentaires du post concerné
         $comments = $commentManager->getComments($id);
+
+        // Si le lien pour le signalement d'un commentaire a été cliqué
+        if ($ID_comment != null) {
+            $commentManager->reportComment($ID_comment);
+            $ID_comment = null;
+            $this->show($slug);
+        }
 
         // Récupération des données pour la création d'un commentaire
         if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['content'])){

@@ -55,6 +55,9 @@
                                         }
                                         ?>
                                     </p>
+                                    <?php if ($comment['flag_reporting'] == 0) { ?>
+                                    <a  href="/post/show/<?= $post['slug'] ?>/<?= $comment['ID_comment'] ?>">Signaler ce commentaire</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>

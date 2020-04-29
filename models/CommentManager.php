@@ -47,6 +47,19 @@ class CommentManager extends Model
         }
     }
 
+    public function reportComment($id) {
+        $sql = "UPDATE comment set flag_reporting = true where ID_comment = :id";
+
+        $req = $this->_connexion->prepare($sql);
+
+        $req->bindValue(':id', $id);
+
+        $modified = $req->execute();
+
+        if(!$modified){
+            echo "Erreur modification" . $this->_connexion->errorInfo();
+        }
+    }
 
     public function deleteComment($id)
     {
