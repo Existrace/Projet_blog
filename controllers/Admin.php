@@ -80,8 +80,9 @@ class Admin extends Controller
         }
     }
 
-    public function moderatecomments() {
-
+    public function moderatecomments($ID_comment = null)
+    {
+        /*PROBLEME SUPPRESSION COMMENTAIRE */
         // Vérifier si un administrateur est connecté
         if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
@@ -89,6 +90,12 @@ class Admin extends Controller
             $commentManager = new CommentManager();
             $comments = $commentManager->getAllComments();
 
+            // Gestion suppression d'un commentaire
+            if ($ID_comment != null) {
+                // Suppression commentaire
+                $commentManager->deleteComment($ID_comment);
+                $this->moderatecomments();
+            }
 
             $this->render('moderatecomments', ['idents' => $_SESSION, 'comments' => $comments]);
         } else {
@@ -97,6 +104,36 @@ class Admin extends Controller
         }
     }
 
+    public function update($ID_post)
+    {
+        if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
+
+            $postManager = new PostManager();
+
+            // Récupération des données pour la modification d'un article
+            if (isset($_POST['submit']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+
+                // Modification d'un article
+
+                $title = $_POST['title'];
+                $content = $_POST['content'];
+                $slug = Miscellaneous::slugify($title);
+
+                $postManager->updatePost($ID_post, $title, $content, $slug);
+                //echo "Succès modification article";
+                $this->index();
+            }
+
+            // Il faut retrouver l'article à modifier
+            $post = $postManager->getPostById($ID_post);
+
+            $this->render("update", compact("post"));
+
+        } else {
+            // Sinon, interdire l'accès à la page
+            $this->render('errorsession');
+        }
+    }
 
     public function logout()
     {

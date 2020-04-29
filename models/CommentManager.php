@@ -11,6 +11,14 @@ class CommentManager extends Model
         return $req->fetchAll();
     }
 
+    /*Récupère qu'un seul commentaire selon son id */
+    public function getCommentByID($id_comment)
+    {
+        $req = "SELECT * FROM comment WHERE ID_comment = $id_comment";
+        $req = $this->_connexion->query($req);
+        return $req->fetch();
+    }
+
     public function getAllComments()
     {
         $req = "SELECT ID_comment, Comment_Email, Comment_Content, Comment_Date, flag_reporting, title 
@@ -39,12 +47,6 @@ class CommentManager extends Model
         }
     }
 
-    public function countComments($id_post)
-    {
-        $req = "SELECT COUNT(*) FROM comment WHERE ID_post = $id_post";
-        $req = $this->_connexion->query($req);
-        return $req->fetch();
-    }
 
     public function deleteComment($id)
     {

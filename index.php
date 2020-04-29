@@ -38,7 +38,7 @@ if ($param[0] != "") {
     } else {
         // On envoie le code réponse 404
         http_response_code(404);
-        echo "La page recherchée n'existe pas";
+        require_once("views/404page.php");
     }
 } else {
     // Si aucun paramètre n'est défini

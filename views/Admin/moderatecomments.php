@@ -35,16 +35,17 @@
                                                         echo "Ce commentaire a été signalé";
                                                     }
                                                     ?>
+                                                    <hr/>
                                                 </p>
+                                                <a href="/admin/moderatecomments/<?= $comment['ID_comment'] ?>"> Supprimer </a>
                                             </div>
-
 
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                             <p>
-                                <a class="black-text text-lighten-3" href="index"> <i class="tiny material-icons">keyboard_return</i>
+                                <a class="black-text text-lighten-3" href="/admin/index"> <i class="tiny material-icons">keyboard_return</i>
                                     Retour à l'accueil administrateur </a>
                             </p>
                         </div>

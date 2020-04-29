@@ -15,9 +15,12 @@
                             <span class="card-title center title_post">
                                 <a class="title_post"
                                    href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
+                                 <br/><i class="material-icons tiny">comment</i> <?= $post['nb_comments'] ?>
                             </span>
                             <hr/>
-                            <p> <?= $post['Post_Date'] ?> </p>
+                            <div class="col m12 center">
+                                <p> <?= $post['Post_Date'] ?> </p>
+                            </div>
                         </div>
                     </div>
                 </div>

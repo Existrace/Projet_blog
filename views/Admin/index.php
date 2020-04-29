@@ -37,7 +37,8 @@
                                                       href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
                                                 </span>
                                                 <hr/>
-
+                                                <a class="title_post"
+                                                   href="/admin/update/<?= $post['ID_post'] ?>"> Modifier</a>
                                             </div>
                                         </div>
                                     </div>
@@ -48,6 +49,10 @@
                         <div>
                             <h5><a href="create"> Créer un nouvel article</a></h5>
                         </div>
+                        <hr/>
+                        <div clas="center">
+                            <a href="/post/index" class="more-link">Retourner à l'accueil du site</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,4 +61,5 @@
     <!--<div class="center">
         <a class="waves-effect waves-light blue-grey btn" href="logout"><i class="material-icons right">directions_run</i>Se déconnecter</a>
     </div>-->
+
 </div>

@@ -5,9 +5,11 @@ class PostManager extends Model
 {
 
     public function getPosts() {
-        $req = "SELECT * FROM post ORDER BY Post_Date DESC";
+        $req = "SELECT ID_post, title, Post_Content, Post_Date, slug, (SELECT count(comment.ID_comment) 
+        FROM comment WHERE comment.ID_post=post.ID_post) AS nb_comments FROM post ORDER BY Post_Date DESC";
         $req = $this->_connexion->query($req);
         return $req->fetchAll();
+
     }
 
     public function getPostById($id) {
@@ -27,11 +29,6 @@ class PostManager extends Model
 
 
     public function createPost($title, $content, $idAuthor, $slug) {
-        /*$req = $this->_connexion->prepare
-        ("INSERT INTO post (title, post_content, post_date, id_admin)
-        VALUES ('$title', '$content', '$date', '$author')");
-        $this->_connexion->exec($req);*/
-
         $sql = "INSERT INTO post (title, Post_Content, Post_Date, ID_Admin, slug)
         VALUES (:title, :content, NOW(), :idadmin, :slug)";
 
@@ -50,9 +47,23 @@ class PostManager extends Model
     }
 
 
-    public function updatePost($id, $title, $content)  {
-        $req = "UPDATE post set title = '$title', Post_Content = '$content' where ID_post = '$id'";
-        $this->_connexion->exec($req);
+    public function updatePost($id, $title, $content, $slug)  {
+        /*$req = "UPDATE post set title = '$title', Post_Content = '$content' where ID_post = '$id'";
+        $this->_connexion->exec($req);*/
+        $sql = "UPDATE post set title = :title, Post_Content = :content, slug = :slug  where ID_post = :id";
+
+        $req = $this->_connexion->prepare($sql);
+
+        $req->bindValue(':title', $title);
+        $req->bindValue(':content', $content);
+        $req->bindValue(':slug', $slug);
+        $req->bindValue(':id', $id);
+
+        $modified = $req->execute();
+
+        if(!$modified){
+            echo "Erreur modification" . $this->_connexion->errorInfo();
+        }
     }
 
     public function deletePost($id) {
