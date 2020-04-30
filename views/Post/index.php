@@ -1,37 +1,32 @@
-<div class="container">
+<div class="container" style="display: flex">
 
-    <div class="row center">
-        <h5 class="header col s12 light">Naviguez...</h5>
-    </div>
+    <!-- Affichage des articles -->
+    <div class="row" style="opacity: 0.79;">
+        <div class="col m12 center">
+            <h5 class="header col s12 light">Billet simple pour l'Alaska</h5>
+        </div>
 
-    <div class="container">
-        <!-- Affichage des articles -->
         <?php /** @var PostManager $posts */
         foreach ($posts as $post): ?>
-            <div class="row" style="opacity: 0.79;">
-                <div class="col m12 s12 l12">
-                    <div class="card black-text">
-                        <div class="card-content">
-                            <span class="card-title center title_post">
-                                <a class="title_post"
-                                   href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
-                                 <br/><i class="material-icons tiny">comment</i> <?= $post['nb_comments'] ?>
-                            </span>
-                            <hr/>
-                            <div class="col m12 center">
-                                <p> <?= $post['Post_Date'] ?> </p>
-                            </div>
-                        </div>
+            <div class="col m6 s12 center">
+                <div class="card">
+                    <div class="card-image">
+                        <img height="400" width="50%" src="/public/images/<?= $post['image'] ?>">
+                        <a class="link_stylised"
+                           href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
+                        <p style="padding: 10px;"> <?= $post['Post_Date'] ?>
+                            <i class="material-icons tiny" style="padding-left: 10px">comment</i> <?= $post['nb_comments'] ?>
+                        </p>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
+        <div class="col m12 center">
+            <a class="link_stylised"
+               href="/admin/login"> Partie administration</a>
+        </div>
     </div>
 
-    <div class="row center">
-        <a class="link_stylised"
-           href="/admin/login"> Partie administration</a>
-    </class>
 
-</div>
+
 

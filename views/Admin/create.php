@@ -16,6 +16,17 @@
                                     Nom de l'article
                                     <input type="text" name='title'/>
                                 </div>
+                                <div class="input-field col m8 s12">
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>Image de l'article</span>
+                                            <input type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" name="image" type="text">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="input-field col m12 s12">
                                     <textarea name='content'></textarea>
                                 </div>

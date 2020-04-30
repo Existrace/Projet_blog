@@ -73,9 +73,10 @@ class Admin extends Controller
                 $title = $_POST['title'];
                 $content = $_POST['content'];
                 $slug = Miscellaneous::slugify($title);
+                $image = $_POST['image'];
                 $idAdmin = $adminManager->getIdUser($_SESSION['login']);
 
-                $postManager->createPost($title, $content, $idAdmin[0], $slug);
+                $postManager->createPost($title, $content, $idAdmin[0], $slug, $image);
                 echo "Succès création article";
                 $this->render("create");
             }
@@ -125,8 +126,9 @@ class Admin extends Controller
                 $title = $_POST['title'];
                 $content = $_POST['content'];
                 $slug = Miscellaneous::slugify($title);
+                $image = $_POST['image'];
 
-                $postManager->updatePost($ID_post, $title, $content, $slug);
+                $postManager->updatePost($ID_post, $title, $content, $slug, $image);
                 //echo "Succès modification article";
                 $this->index();
             }

@@ -5,7 +5,7 @@ class PostManager extends Model
 {
 
     public function getPosts() {
-        $req = "SELECT ID_post, title, Post_Content, Post_Date, slug, (SELECT count(comment.ID_comment) 
+        $req = "SELECT ID_post, title, Post_Content, Post_Date, slug, image, (SELECT count(comment.ID_comment) 
         FROM comment WHERE comment.ID_post=post.ID_post) AS nb_comments FROM post ORDER BY Post_Date DESC";
         $req = $this->_connexion->query($req);
         return $req->fetchAll();
@@ -28,9 +28,9 @@ class PostManager extends Model
     }
 
 
-    public function createPost($title, $content, $idAuthor, $slug) {
-        $sql = "INSERT INTO post (title, Post_Content, Post_Date, ID_Admin, slug)
-        VALUES (:title, :content, NOW(), :idadmin, :slug)";
+    public function createPost($title, $content, $idAuthor, $slug, $image) {
+        $sql = "INSERT INTO post (title, Post_Content, Post_Date, ID_Admin, slug, image)
+        VALUES (:title, :content, NOW(), :idadmin, :slug, :image)";
 
         $req = $this->_connexion->prepare($sql);
 
@@ -38,6 +38,7 @@ class PostManager extends Model
         $req->bindValue(':content', $content);
         $req->bindValue(':idadmin', $idAuthor);
         $req->bindValue(':slug', $slug);
+        $req->bindValue(':image', $image);
 
         $inserted = $req->execute();
 
@@ -47,9 +48,9 @@ class PostManager extends Model
     }
 
 
-    public function updatePost($id, $title, $content, $slug)  {
+    public function updatePost($id, $title, $content, $slug, $image)  {
 
-        $sql = "UPDATE post set title = :title, Post_Content = :content, slug = :slug  where ID_post = :id";
+        $sql = "UPDATE post set title = :title, Post_Content = :content, slug = :slug, image = :image  where ID_post = :id";
 
         $req = $this->_connexion->prepare($sql);
 
@@ -57,6 +58,7 @@ class PostManager extends Model
         $req->bindValue(':content', $content);
         $req->bindValue(':slug', $slug);
         $req->bindValue(':id', $id);
+        $req->bindValue(':image', $image);
 
         $modified = $req->execute();
 

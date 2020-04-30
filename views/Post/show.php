@@ -3,7 +3,7 @@
 
         <!--   Page Section  -->
         <div class="row">
-            <div class="col m12">
+            <div class="col m12 center">
                 <div class="card" style="opacity: 0.85;">
                     <div class="center">
                         <span class="card-title">
@@ -12,22 +12,22 @@
                         </span>
                     </div>
                     <div class="card-content">
-
                         <p class="black-text"> Publié par Admin le <?= $post['Post_Date'] ?> </p><br>
+                        <img height="80%" width="80%" src="/public/images/<?= $post['image'] ?>"><hr/>
                         <p> <?= $post['Post_Content'] ?></p>
 
                         <hr>
-                        <p class="subheader"> Commentaires</p>
+                        <h5> Commentaires</h5>
                         <!-- Formulaire de création d'un commentaire -->
                         <br/>
                         <div class="row">
-                            <div class="col s12">
+                            <div class="col m12 s12 center">
                                 <form action="" method="post">
-                                    <div class="input-field col m6 s12">
+                                    <div class="input-field col m12 s12">
                                         Veuillez renseigner votre e-mail*
                                         <input type="text" name='email'/>
                                     </div>
-                                    <div class="input-field col m7 s12">
+                                    <div class="input-field col m12 s12">
                                         Commentaire
                                         <textarea class="materialize-textarea" name="content"></textarea>
                                     </div>
@@ -63,10 +63,18 @@
                         <?php endforeach; ?>
 
                         <hr/>
+                        <?php if(!$_SESSION) {?>
                         <p>
                             <a class="black-text text-lighten-3" href="/post/index"> <i class="tiny material-icons">keyboard_return</i>
                                 Retour aux articles </a>
                         </p>
+                        <?php } ?>
+                        <?php if($_SESSION) {?>
+                        <p>
+                            <a class="black-text text-lighten-3" href="/admin/index"> <i class="tiny material-icons">keyboard_return</i>
+                                Retour au panneau d'administration</a>
+                        </p>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

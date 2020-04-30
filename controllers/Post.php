@@ -12,6 +12,7 @@ class Post extends Controller {
      * @param bool $logout
      */
     public function index($logout = false) {
+
         $postManager = new PostManager();
 
         // Récupération des billets de blog
@@ -24,7 +25,7 @@ class Post extends Controller {
             session_destroy ();
         }
 
-        $this->render('index', ['posts' => $posts]);
+        $this->render('index', compact("posts"));
     }
 
     /*

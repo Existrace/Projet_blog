@@ -14,13 +14,15 @@
                     <div class="card-content center">
 
                         <p>Ici vous pouvez gérer vos article et modérer les commentaires</p>
+                        <div class="row">
+                            <div class="col m6 s12" style="padding: 20px">
+                                <a class="link_stylised" href="moderatecomments"> Modérer les commentaires</a>
+                            </div>
+                            <div class="col m6 s12" style="padding: 20px">
+                                <a class="link_stylised" href="create"> Création d'un nouvel article</a>
+                            </div>
+                        </div>
 
-                        <div style="padding: 15px">
-                            <a class="link_stylised" href="moderatecomments"> Modérer les commentaires</a>
-                        </div>
-                        <div style="padding: 15px">
-                            <a class="link_stylised" href="create"> Création d'un nouvel article</a>
-                        </div>
 
                         <hr/>
 
