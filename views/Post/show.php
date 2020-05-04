@@ -22,7 +22,7 @@
                         <br/>
                         <div class="row">
                             <div class="col m12 s12 center">
-                                <form action="" method="post">
+                                <form action="/comment/createcomments/<?= $post['slug'] ?>/<?= $post['ID_post'] ?>" method="post">
                                     <div class="input-field col m12 s12">
                                         Veuillez renseigner votre e-mail*
                                         <input type="text" name='email'/>

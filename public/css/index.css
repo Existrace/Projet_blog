@@ -31,6 +31,30 @@ body {
     background-color: darkslateblue;
 }
 
+.image_article {
+    background-size: cover;
+    height: 400px;
+    width: 50%;
+}
+
+/* Smartphone */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .image_article {
+        background-size: cover;
+        height: 50%;
+        width: 50%;
+    }
+}
+
+/* Tablette */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1366px) {
+    .image_article {
+        background-size: cover;
+        height: 200px;
+        width: 50%;
+    }
+}
+
 
 /*
 @font-face {

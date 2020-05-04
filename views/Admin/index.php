@@ -46,7 +46,7 @@
                                                    href="/admin/update/<?= $post['ID_post'] ?>"> Modifier</a>
                                                 |
                                                 <a
-                                                   href="/admin/index/<?= $post['ID_post'] ?>"> Supprimer</a>
+                                                   href="/post/deletepost/<?= $post['ID_post'] ?>"> Supprimer</a>
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
 
                         <hr/>
                         <div class="center" style="padding: 15px">
-                            <a class="link_stylised" href="/post/index/logout">Se déconnecter</a>
+                            <a class="link_stylised" href="/admin/logout">Se déconnecter</a>
                         </div>
                     </div>
                 </div>

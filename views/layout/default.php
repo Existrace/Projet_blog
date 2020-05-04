@@ -15,7 +15,6 @@
 </head>
 
 <body>
-<?php unset($_POST); ?>
 
 <div class="card-panel" style="background-size: cover; background-image: url('/public/images/landscape-2124756_1280.jpg');">
     <h2 class="center white-text" style="font-weight: bold;

@@ -11,7 +11,7 @@
             <div class="col m6 s12 center">
                 <div class="card">
                     <div class="card-image">
-                        <img height="400" width="50%" src="/public/images/<?= $post['image'] ?>">
+                        <img class="image_article" src="/public/images/<?= $post['image'] ?>" alt="image_article">
                         <a class="link_stylised"
                            href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
                         <p style="padding: 10px;"> <?= $post['Post_Date'] ?>

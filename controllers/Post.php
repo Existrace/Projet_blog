@@ -11,19 +11,12 @@ class Post extends Controller {
      * Fonction affichant tous les billets deblog
      * @param bool $logout
      */
-    public function index($logout = false) {
+    public function index() {
 
         $postManager = new PostManager();
 
         // Récupération des billets de blog
         $posts = $postManager->getPosts();
-
-        // Gère la déconnexion
-        if($logout != false) {
-            session_unset ();
-            // Destruction de la session
-            session_destroy ();
-        }
 
         $this->render('index', compact("posts"));
     }
@@ -50,16 +43,22 @@ class Post extends Controller {
             $this->show($slug);
         }
 
-        // Récupération des données pour la création d'un commentaire
-        if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['content'])){
-            $email = $_POST['email'];
-            $content = $_POST['content'];
-            $commentManager->createComment($email, $content , $id);
-            $comments = $commentManager->getComments($id);
-            $this->render('show', compact("post", "comments"));
-        }
-
         $this->render('show', compact("post", "comments"));
+    }
+
+
+    /**
+     * @param $ID_post
+     */
+    public function deletepost($ID_post) {
+
+        $postManager = new PostManager();
+        // Gestion suppression d'un post
+        if ($ID_post != null) {
+            // Suppression commentaire
+            $postManager->deletePost($ID_post);
+            header('Location:/admin/index');
+        }
     }
 
 }

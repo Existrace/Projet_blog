@@ -23,7 +23,7 @@ class Admin extends Controller
                 $_SESSION['login'] = $admin = $_POST['admin'];
                 $_SESSION['pwd'] = $admin = $_POST['pass'];
 
-                $this->index();
+                header('Location:/admin/index');
 
             } else {
                 ECHO "Echec authentification";
@@ -33,8 +33,20 @@ class Admin extends Controller
         $this->render('login');
     }
 
+    public function logout()
+    {
+        // Gère la déconnexion
 
-    public function index($ID_post = null)
+        session_unset();
+        // Destruction de la session
+        session_destroy();
+
+        // Redirection accueil principale
+        header('Location:/post/index');
+
+    }
+
+    public function index()
     {
         // Vérifier si un administrateur est connecté
         if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
@@ -43,12 +55,12 @@ class Admin extends Controller
             // Récupération et affichage des articles dans la vue
             $posts = $postManager->getPosts();
 
-            // Gestion suppression d'un post
-            if ($ID_post != null) {
-                // Suppression commentaire
-                $postManager->deletePost($ID_post);
-                $this->index();
-            }
+            /* // Gestion suppression d'un post
+             if ($ID_post != null) {
+                 // Suppression commentaire
+                 $postManager->deletePost($ID_post);
+                 $this->index();
+             }*/
 
             $this->render('index', ['idents' => $_SESSION, 'posts' => $posts]);
         } else {
@@ -57,6 +69,9 @@ class Admin extends Controller
         }
     }
 
+    /*
+        Méthode pour créer un article en mode admin
+     */
     public function create()
     {
         // Vérifier si un administrateur est connecté
@@ -90,7 +105,6 @@ class Admin extends Controller
 
     public function moderatecomments($ID_comment = null)
     {
-        /*PROBLEME SUPPRESSION COMMENTAIRE */
         // Vérifier si un administrateur est connecté
         if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
 
