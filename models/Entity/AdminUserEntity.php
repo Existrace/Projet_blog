@@ -68,11 +68,11 @@ class AdminUserEntity
     }
 
     /**
-     * @param $password
+     * @param $email
      */
-    public function setEmail($password)
+    public function setEmail($email)
     {
-        $this->_email = $password;
+        $this->_email = $email;
     }
 
 
