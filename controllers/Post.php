@@ -1,15 +1,14 @@
 <?php
 
 /* Améliorer avec spl_autoload_register */
-require_once("models/PostManager.php");
-require_once("models/CommentManager.php");
+require_once("models/Manager/PostManager.php");
+require_once("models/Manager/CommentManager.php");
 
 
 class Post extends Controller {
 
     /**
-     * Fonction affichant tous les billets deblog
-     * @param bool $logout
+     * Fonction affichant tous les billets de blog
      */
     public function index() {
 
@@ -55,7 +54,7 @@ class Post extends Controller {
         $postManager = new PostManager();
         // Gestion suppression d'un post
         if ($ID_post != null) {
-            // Suppression commentaire
+            // Suppression d'un post
             $postManager->deletePost($ID_post);
             header('Location:/admin/index');
         }

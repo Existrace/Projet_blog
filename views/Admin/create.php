@@ -14,7 +14,7 @@
                             <form method="post">
                                 <div class="input-field col m8 s12">
                                     Nom de l'article
-                                    <input type="text" name='title'/>
+                                    <input type="text" name='title' required maxlength="80"/>
                                 </div>
                                 <div class="input-field col m8 s12">
                                     <div class="file-field input-field">
@@ -22,13 +22,13 @@
                                             <span>Image de l'article</span>
                                             <input type="file">
                                         </div>
-                                        <div class="file-path-wrapper">
+                                        <div>
                                             <input class="file-path validate" name="image" type="text">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="input-field col m12 s12">
-                                    <textarea name='content'></textarea>
+                                    <textarea name='content' required maxlength="3000"></textarea>
                                 </div>
                                 <div class="col m12 s12 center">
                                     <button class="btn waves-effect waves-light blue-grey" type="submit" name="submit">

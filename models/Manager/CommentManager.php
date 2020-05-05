@@ -14,7 +14,7 @@ class CommentManager extends Model
 
     public function getAllComments()
     {
-        $req = "SELECT ID_comment, Comment_Email, Comment_Content, Comment_Date, flag_reporting, title 
+        $req = "SELECT ID_comment, Nickname, Comment_Content, Comment_Date, flag_reporting, title 
         FROM comment
         INNER JOIN post ON comment.ID_post = post.ID_post ORDER BY flag_reporting DESC, title";
         $req = $this->_connexion->query($req);
@@ -22,14 +22,14 @@ class CommentManager extends Model
     }
 
 
-    public function createComment($email, $content, $idPost)
+    public function createComment($nickname, $content, $idPost)
     {
-        $sql = "INSERT INTO comment ( Comment_Email, Comment_Content, Comment_Date, ID_post)
-        VALUES (:email, :content, NOW(), :idPost)";
+        $sql = "INSERT INTO comment ( Nickname, Comment_Content, Comment_Date, ID_post)
+        VALUES (:nickname, :content, NOW(), :idPost)";
 
         $req = $this->_connexion->prepare($sql);
 
-        $req->bindValue(':email', $email);
+        $req->bindValue(':nickname', $nickname);
         $req->bindValue(':content', $content);
         $req->bindValue(':idPost', $idPost);
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once("models/CommentManager.php");
+require_once("models/Manager/CommentManager.php");
 
 class Comment extends Controller
 {
@@ -10,10 +10,10 @@ class Comment extends Controller
     public function createcomments($slug, $ID_post) {
         $commentManager = new CommentManager();
         // Récupération des données pour la création d'un commentaire
-        if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['content'])){
-            $email = $_POST['email'];
+        if(isset($_POST['submit']) && !empty($_POST['nickname']) && !empty($_POST['content'])){
+            $nickname = $_POST['nickname'];
             $content = $_POST['content'];
-            $commentManager->createComment($email, $content , $ID_post);
+            $commentManager->createComment($nickname, $content , $ID_post);
             $commentManager->getComments($ID_post);
 
             // Reviens à l'article initial (Contrôleur post)

@@ -23,7 +23,7 @@
                                             <div class="card-content">
                                                 <!--<p><?/*= $comment['Post_Date'] */?> </p>-->
                                                 <span class="center title_post">
-                                                    Soumis par <strong><?= $comment['Comment_Email'] ?></strong>, le <?= $comment['Comment_Date'] ?><br/>
+                                                    Soumis par <strong><?= $comment['Nickname'] ?></strong>, le <?= $comment['Comment_Date'] ?><br/>
                                                     Article concerné : <strong><?= $comment['title'] ?></strong>
                                                 </span>
                                                 <hr/>

@@ -24,12 +24,12 @@
                             <div class="col m12 s12 center">
                                 <form action="/comment/createcomments/<?= $post['slug'] ?>/<?= $post['ID_post'] ?>" method="post">
                                     <div class="input-field col m12 s12">
-                                        Veuillez renseigner votre e-mail*
-                                        <input type="text" name='email'/>
+                                        Pseudo*
+                                        <input type="text" name='nickname' required maxlength="40"/>
                                     </div>
                                     <div class="input-field col m12 s12">
                                         Commentaire
-                                        <textarea class="materialize-textarea" name="content"></textarea>
+                                        <textarea class="materialize-textarea" name="content" required maxlength="400"></textarea>
                                     </div>
                                     <div class="col m12 s12">
                                         <button class="btn waves-effect waves-light blue-grey" type="submit"
@@ -42,11 +42,12 @@
                             </div>
                         </div>
 
+                        <!-- AFFICHAGE DES COMMENTAIRES -->
                         <?php /** @var CommentManager $comments */
                         foreach ($comments as $comment): ?>
                             <div class="card tiny">
                                 <div class="card-content">
-                                    <p>Soumis par <strong><?= $comment['Comment_Email'] ?></strong>,
+                                    <p>Soumis par <strong><?= $comment['Nickname'] ?></strong>,
                                         le <?= $comment['Comment_Date'] ?>  </p>
                                     <p>  <?= $comment['Comment_Content'] ?></p>
                                     <p class="red-text">

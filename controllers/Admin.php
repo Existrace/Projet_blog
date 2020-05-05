@@ -1,8 +1,8 @@
 <?php
 
-require_once("models/AdminUserManager.php");
-require_once("models/PostManager.php");
-require_once("models/CommentManager.php");
+require_once("models/Manager/AdminUserManager.php");
+require_once("models/Manager/PostManager.php");
+require_once("models/Manager/CommentManager.php");
 require_once("Services/Miscellaneous.php");
 
 class Admin extends Controller
@@ -19,9 +19,8 @@ class Admin extends Controller
             // Si les identifiants existent dans la base de données
             if ($adminUserManager->getUser($admin, $pass)) {
 
-                // Enregistrement des ident en tant que vaiable de session
+                // Enregistrement de l'ident en tant que vaiable de session
                 $_SESSION['login'] = $admin = $_POST['admin'];
-                $_SESSION['pwd'] = $admin = $_POST['pass'];
 
                 header('Location:/admin/index');
 
@@ -36,7 +35,6 @@ class Admin extends Controller
     public function logout()
     {
         // Gère la déconnexion
-
         session_unset();
         // Destruction de la session
         session_destroy();
@@ -49,54 +47,13 @@ class Admin extends Controller
     public function index()
     {
         // Vérifier si un administrateur est connecté
-        if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
+        if (isset($_SESSION['login'])) {
 
             $postManager = new PostManager();
             // Récupération et affichage des articles dans la vue
             $posts = $postManager->getPosts();
 
-            /* // Gestion suppression d'un post
-             if ($ID_post != null) {
-                 // Suppression commentaire
-                 $postManager->deletePost($ID_post);
-                 $this->index();
-             }*/
-
             $this->render('index', ['idents' => $_SESSION, 'posts' => $posts]);
-        } else {
-            // Sinon, interdire l'accès à la page
-            $this->render('errorsession');
-        }
-    }
-
-    /*
-        Méthode pour créer un article en mode admin
-     */
-    public function create()
-    {
-        // Vérifier si un administrateur est connecté
-        if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
-
-            // Création de l'article
-            $postManager = new PostManager();
-            // Récupération des données pour la création d'un article
-            if (isset($_POST['submit']) && !empty($_POST['title']) && !empty($_POST['content'])) {
-
-                // Récupération de l'id de l'admin connecté
-                $adminManager = new AdminUserManager();
-
-                $title = $_POST['title'];
-                $content = $_POST['content'];
-                $slug = Miscellaneous::slugify($title);
-                $image = $_POST['image'];
-                $idAdmin = $adminManager->getIdUser($_SESSION['login']);
-
-                $postManager->createPost($title, $content, $idAdmin[0], $slug, $image);
-                echo "Succès création article";
-                $this->render("create");
-            }
-
-            $this->render('create', ['idents' => $_SESSION]);
         } else {
             // Sinon, interdire l'accès à la page
             $this->render('errorsession');
@@ -106,7 +63,7 @@ class Admin extends Controller
     public function moderatecomments($ID_comment = null)
     {
         // Vérifier si un administrateur est connecté
-        if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
+        if (isset($_SESSION['login'])) {
 
             // Récupération des données pour la création d'un article
             $commentManager = new CommentManager();
@@ -126,9 +83,44 @@ class Admin extends Controller
         }
     }
 
+
+    /*
+        Méthode pour créer un article en mode admin
+     */
+    public function create()
+    {
+        // Vérifier si un administrateur est connecté
+        if (isset($_SESSION['login'])) {
+
+            // Création de l'article
+            $postManager = new PostManager();
+            // Récupération des données pour la création d'un article
+            if (isset($_POST['submit']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+
+                // Récupération de l'id de l'admin connecté
+                $adminManager = new AdminUserManager();
+
+                $title = $_POST['title'];
+                $content = $_POST['content'];
+                $slug = Miscellaneous::slugify($title);
+                $image = $_POST['image'];
+                $idAdmin = $adminManager->getIdUser($_SESSION['login']);
+
+                $postManager->createPost($title, $content, $idAdmin[0], $slug, $image);
+                // Redirection accueil principale
+                header('Location:/admin/index');
+            }
+
+            $this->render('create', ['idents' => $_SESSION]);
+        } else {
+            // Sinon, interdire l'accès à la page
+            $this->render('errorsession');
+        }
+    }
+
     public function update($ID_post)
     {
-        if (isset($_SESSION['login']) && isset($_SESSION['pwd'])) {
+        if (isset($_SESSION['login'])) {
 
             $postManager = new PostManager();
 
@@ -144,7 +136,8 @@ class Admin extends Controller
 
                 $postManager->updatePost($ID_post, $title, $content, $slug, $image);
                 //echo "Succès modification article";
-                $this->index();
+                // Redirection accueil principale
+                header('Location:/admin/index');
             }
 
             // Il faut retrouver l'article à modifier

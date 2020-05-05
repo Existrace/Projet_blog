@@ -14,7 +14,7 @@
                             <form method="post">
                                 <div class="input-field col m8 s12">
                                     Nom de l'article
-                                    <input type="text" name='title' value=" <?= /** @var PostManager $post */
+                                    <input type="text" name='title' required maxlength="80" value=" <?= /** @var PostManager $post */
                                     $post['title'] ?>"/>
                                 </div>
                                 <div class="input-field col m8 s12">
@@ -29,7 +29,7 @@
                                     </div>
                                 </div>
                                 <div class="input-field col m12 s12">
-                                    <textarea name='content'>
+                                    <textarea name='content' required maxlength="3000">
                                         <?= $post['Post_Content'] ?>
                                     </textarea>
                                 </div>
