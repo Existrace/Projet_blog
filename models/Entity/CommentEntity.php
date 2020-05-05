@@ -11,6 +11,18 @@ class CommentEntity
     private $_post;
     private $_flag;
 
+    /* Constructeur */
+    public function __construct($id = null, $nickname = null, $content = null, $date = null,
+                                $post = null) {
+        $this->_id = $id;
+        $this->_nickname = $nickname;
+        $this->_content = $content;
+        $this->_date = $date;
+        $this->_post = $post;
+        $this->_flag = 0; // Met le signalement (flag) en false par défaut
+    }
+
+
     /* Setters & Getters */
 
     /**

@@ -3,6 +3,7 @@
 /* Améliorer avec spl_autoload_register */
 require_once("models/Manager/PostManager.php");
 require_once("models/Manager/CommentManager.php");
+require_once("app/Model.php");
 
 
 class Post extends Controller {
@@ -11,6 +12,13 @@ class Post extends Controller {
      * Fonction affichant tous les billets de blog
      */
     public function index() {
+
+        // Modification de la façon d'obtenir les entités qui sont devenus des objets
+
+        // Création d'une instance de pdo
+        $db = new Model();
+
+        // A chaque manager, on passera en paramètre l'instance de pdo
 
         $postManager = new PostManager();
 

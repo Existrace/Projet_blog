@@ -9,6 +9,16 @@ class AdminUserEntity
     private $_password;
     private $_email;
 
+    /* Constructeur */
+    public function __construct($id = null, $username = null, $password = null, $email = null) {
+        $this->_id = $id;
+        $this->_username = $username;
+        // Il faut penser à hasher le mot de passe
+        $this->_password = $password;
+        $this->_email = $email;
+    }
+
+
     /* Setters & Getters */
 
     /**

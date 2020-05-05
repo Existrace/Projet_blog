@@ -11,6 +11,21 @@ class PostEntity
     private $_user;
     private $_slug;
     private $_image;
+    private $_commentaires = [];
+
+    /* Constructeur */
+    public function __construct($id = null, $title = null, $contenu = null, $dateCreation = null,
+    $user = null, $slug = null, $image = null, $commentaires = null)
+    {
+        $this->_id = $id;
+        $this->_title = $title;
+        $this->_content = $contenu;
+        $this->_date = $dateCreation;
+        $this->_user = $user;
+        $this->_slug = $slug;
+        $this->_image = $image;
+        $this->_commentaires = $commentaires;
+    }
 
 
     /* Setters & Getters */
@@ -18,8 +33,7 @@ class PostEntity
     /**
      * @return mixed
      */
-    public function getId()
-    {
+    public function getId(){
         return $this->_id;
     }
 
@@ -117,6 +131,30 @@ class PostEntity
     public function setImage($image)
     {
         $this->_image = $image;
+    }
+
+
+    public function getCommentaires(){
+        return $this->_commentaires;
+    }
+
+    /**
+     * @param $commentaires
+     */
+    public function setCommentaires($commentaires)
+    {
+        $this->_commentaires[] = $commentaires;
+    }
+
+    /* Méthodes */
+
+
+    /**
+     * Retourne le nombre de commentaires d'un article
+     * @return int
+     */
+    public function getNombreCommentaires(){
+        return count($this->_commentaires);
     }
 
 }

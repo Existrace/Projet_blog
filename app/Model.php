@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class Model
+class Model
 {
     /**
      * @var PDO
@@ -11,10 +11,6 @@ abstract class Model
     private $_bdd = "blog_jean";
     private $_user = "root";
     private $_password = "";
-
-    /*// Propriétés contenant les informations de requêtes
-    public $table;
-    public $id;*/
 
     public function __construct() {
         try{
