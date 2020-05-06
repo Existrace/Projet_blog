@@ -1,12 +1,12 @@
 <?php
 
 
-class AdminUserManager extends Model
+class AdminUserManager extends ManagerMaster
 {
 
     /* Vérifier si l'utilisateur existe */
     public function getUser($user, $mdp) {
-            $req = $this->_connexion->prepare("SELECT * FROM adminuser WHERE Username = :user AND Password = :mdp");
+            $req = $this->bdd->prepare("SELECT * FROM adminuser WHERE Username = :user AND Password = :mdp");
             $req->bindValue(':user', $user, PDO::PARAM_STR);
             $req->bindValue(':mdp', $mdp, PDO::PARAM_STR);
             $req->execute();
@@ -20,7 +20,7 @@ class AdminUserManager extends Model
     }
 
     public function getIdUser($username) {
-        $req = $this->_connexion->prepare("SELECT ID_Admin FROM adminuser WHERE Username = :username");
+        $req = $this->bdd->prepare("SELECT ID_Admin FROM adminuser WHERE Username = :username");
         $req->bindValue(':username', $username);
         $req->execute();
         return $req->fetch();

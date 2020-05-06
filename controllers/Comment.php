@@ -14,7 +14,7 @@ class Comment extends Controller
             $nickname = $_POST['nickname'];
             $content = $_POST['content'];
             $commentManager->createComment($nickname, $content , $ID_post);
-            $commentManager->getComments($ID_post);
+            $commentManager->getCommentsByPost($ID_post);
 
             // Reviens à l'article initial (Contrôleur post)
             header('Location:/post/show/'.$slug);

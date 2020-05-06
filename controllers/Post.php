@@ -3,7 +3,7 @@
 /* Améliorer avec spl_autoload_register */
 require_once("models/Manager/PostManager.php");
 require_once("models/Manager/CommentManager.php");
-require_once("app/Model.php");
+require_once("models/Entity/PostEntity.php");
 
 
 class Post extends Controller {
@@ -13,14 +13,11 @@ class Post extends Controller {
      */
     public function index() {
 
-        // Modification de la façon d'obtenir les entités qui sont devenus des objets
-
-        // Création d'une instance de pdo
-        $db = new Model();
-
+        // Création d'une instance pdo
+        $db = Model::getPdo();
         // A chaque manager, on passera en paramètre l'instance de pdo
 
-        $postManager = new PostManager();
+        $postManager = new PostManager($db);
 
         // Récupération des billets de blog
         $posts = $postManager->getPosts();
@@ -33,15 +30,23 @@ class Post extends Controller {
      * */
     public function show($slug, $ID_comment = null) {
 
-        $postManager = new PostManager();
-        $commentManager = new CommentManager();
-        // Récupération du billet en paramètre (id)
+        // Création d'une instance pdo
+        $db = Model::getPdo();
 
+        // Appel des managers
+        $postManager = new PostManager($db);
+        $commentManager = new CommentManager($db);
+
+        /** @var PostEntity $post */
         $post = $postManager->getPostBySlug($slug);
-        $id =  $post["ID_post"];
+
+        /** @var CommentEntity $comments */
+        $comments = $post->getCommentaires();
+
+       /* $id =  $post["ID_post"];
 
         // Récupère les commentaires du post concerné
-        $comments = $commentManager->getComments($id);
+        $comments = $commentManager->getCommentsByPost($id);*/
 
         // Si le lien pour le signalement d'un commentaire a été cliqué
         if ($ID_comment != null) {
@@ -59,7 +64,10 @@ class Post extends Controller {
      */
     public function deletepost($ID_post) {
 
-        $postManager = new PostManager();
+        // Création d'une instance pdo
+        $db = Model::getPdo();
+
+        $postManager = new PostManager($db);
         // Gestion suppression d'un post
         if ($ID_post != null) {
             // Suppression d'un post

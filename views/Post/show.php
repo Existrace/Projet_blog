@@ -7,29 +7,28 @@
                 <div class="card" style="opacity: 0.85;">
                     <div class="center">
                         <span class="card-title">
-                            <?php /** @var PostManager $post */ ?>
-                            <?= $post['title'] ?>
+                            <?php /** @var PostEntity $post */ ?>
+                            <?= $post->getTitle(); ?>
                         </span>
                     </div>
                     <div class="card-content">
-                        <p class="black-text"> Publié par Admin le <?= $post['Post_Date'] ?> </p><br>
-                        <img height="80%" width="80%" src="/public/images/<?= $post['image'] ?>"><hr/>
-                        <p> <?= $post['Post_Content'] ?></p>
+                        <p class="black-text"> Publié par Admin le <?= $post->getDate(); ?> </p><br>
+                        <img height="80%" width="80%" src="/public/images/<?= $post->getImage(); ?>"><hr/>
+                        <p> <?= $post->getContent(); ?></p>
 
                         <hr>
                         <h5> Commentaires</h5>
                         <!-- Formulaire de création d'un commentaire -->
-                        <br/>
                         <div class="row">
                             <div class="col m12 s12 center">
-                                <form action="/comment/createcomments/<?= $post['slug'] ?>/<?= $post['ID_post'] ?>" method="post">
+                                <form action="/comment/createcomments/<?= $post->getSlug() ?>/<?= $post->getId() ?>" method="post">
                                     <div class="input-field col m12 s12">
                                         Pseudo*
                                         <input type="text" name='nickname' required maxlength="40"/>
                                     </div>
                                     <div class="input-field col m12 s12">
                                         Commentaire
-                                        <textarea class="materialize-textarea" name="content" required maxlength="400"></textarea>
+                                        <textarea class="materialize-textarea" name="content" required maxlength="4"></textarea>
                                     </div>
                                     <div class="col m12 s12">
                                         <button class="btn waves-effect waves-light blue-grey" type="submit"
@@ -43,7 +42,7 @@
                         </div>
 
                         <!-- AFFICHAGE DES COMMENTAIRES -->
-                        <?php /** @var CommentManager $comments */
+                        <?php /** @var array $comments */
                         foreach ($comments as $comment): ?>
                             <div class="card tiny">
                                 <div class="card-content">
@@ -57,11 +56,12 @@
                                         ?>
                                     </p>
                                     <?php if ($comment['flag_reporting'] == 0) { ?>
-                                    <a  href="/post/show/<?= $post['slug'] ?>/<?= $comment['ID_comment'] ?>">Signaler ce commentaire</a>
+                                        <a  href="/post/show/<?= $post->getSlug()?>/<?= $comment['ID_comment'] ?>">Signaler ce commentaire</a>
                                     <?php } ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>
+
 
                         <hr/>
                         <?php if(!$_SESSION) {?>

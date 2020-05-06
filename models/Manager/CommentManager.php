@@ -1,13 +1,13 @@
 <?php
 
 
-class CommentManager extends Model
+class CommentManager extends ManagerMaster
 {
     /* Récupère les commentaires d'un post passé en paramètre */
-    public function getComments($id_post)
+    public function getCommentsByPost($id_post)
     {
         $req = "SELECT * FROM comment WHERE ID_post = $id_post";
-        $req = $this->_connexion->query($req);
+        $req = $this->bdd->query($req);
         return $req->fetchAll();
     }
 
@@ -17,7 +17,7 @@ class CommentManager extends Model
         $req = "SELECT ID_comment, Nickname, Comment_Content, Comment_Date, flag_reporting, title 
         FROM comment
         INNER JOIN post ON comment.ID_post = post.ID_post ORDER BY flag_reporting DESC, title";
-        $req = $this->_connexion->query($req);
+        $req = $this->bdd->query($req);
         return $req->fetchAll();
     }
 
@@ -27,7 +27,7 @@ class CommentManager extends Model
         $sql = "INSERT INTO comment ( Nickname, Comment_Content, Comment_Date, ID_post)
         VALUES (:nickname, :content, NOW(), :idPost)";
 
-        $req = $this->_connexion->prepare($sql);
+        $req = $this->bdd->prepare($sql);
 
         $req->bindValue(':nickname', $nickname);
         $req->bindValue(':content', $content);
@@ -36,27 +36,27 @@ class CommentManager extends Model
         $inserted = $req->execute();
 
         if(!$inserted){
-            echo "Erreur création" . $this->_connexion->errorInfo();
+            echo "Erreur création" . $this->bdd->errorInfo();
         }
     }
 
     public function reportComment($id) {
         $sql = "UPDATE comment set flag_reporting = true where ID_comment = :id";
 
-        $req = $this->_connexion->prepare($sql);
+        $req = $this->bdd->prepare($sql);
 
         $req->bindValue(':id', $id);
 
         $modified = $req->execute();
 
         if(!$modified){
-            echo "Erreur modification" . $this->_connexion->errorInfo();
+            echo "Erreur modification" . $this->bdd->errorInfo();
         }
     }
 
     public function deleteComment($id)
     {
         $req = "DELETE FROM comment where ID_comment = '$id'";
-        $this->_connexion->exec($req);
+        $this->bdd->exec($req);
     }
 }

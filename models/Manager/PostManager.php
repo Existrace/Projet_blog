@@ -1,19 +1,33 @@
 <?php
 
+require_once("models/Manager/ManagerMaster.php");
 
-class PostManager extends Model
+/*
+ *  Manager qui s'occupe de la gestion de l'entité Post
+ *  */
+class PostManager extends ManagerMaster
 {
 
     public function getPosts() {
-        $req = "SELECT ID_post, title, Post_Content, Post_Date, slug, image, (SELECT count(comment.ID_comment) 
-        FROM comment WHERE comment.ID_post=post.ID_post) AS nb_comments FROM post ORDER BY Post_Date DESC";
-        $req = $this->_connexion->query($req);
-        return $req->fetchAll();
+        // Récupération de tous les posts
+        $req = "SELECT * FROM post";
+        $result = $this->bdd->query($req);
+        // Tableau qui va contenir tous les posts
+        $posts = [];
 
+        // Récupération des commentaires de chaque post
+        $commentManager = new CommentManager( $this->bdd);
+        foreach($result as $value){
+            $comments = $commentManager->getCommentsByPost($value['ID_post']);
+            $posts[] = new PostEntity($value['ID_post'], $value['title'], $value['Post_Content'], $value['Post_Date'], $value['ID_Admin'],
+            $value['slug'], $value['image'], $comments);
+        }
+
+        return $posts;
     }
 
     public function getPostById($id) {
-        $req = $this->_connexion->prepare("SELECT * FROM post where ID_post = ?");
+        $req = $this->bdd->prepare("SELECT * FROM post where ID_post = ?");
         $req->execute(array($id));
         return $req->fetch();
     }
@@ -22,9 +36,16 @@ class PostManager extends Model
      * @param string $slug
      */
     public function getPostBySlug($slug) {
-        $req = $this->_connexion->prepare("SELECT * FROM post where slug = ?");
+        $req = $this->bdd->prepare("SELECT * FROM post where slug = ?");
         $req->execute(array($slug));
-        return $req->fetch();
+        $data = $req->fetch();
+
+        // Récupération des commentaires du post
+        $commentManager = new CommentManager( $this->bdd);
+        $comments = $commentManager->getCommentsByPost($data['ID_post']);
+
+        return new PostEntity($data['ID_post'], $data['title'], $data['Post_Content'], $data['Post_Date'], $data['ID_Admin'],
+            $data['slug'], $data['image'], $comments);
     }
 
 
@@ -32,7 +53,7 @@ class PostManager extends Model
         $sql = "INSERT INTO post (title, Post_Content, Post_Date, ID_Admin, slug, image)
         VALUES (:title, :content, NOW(), :idadmin, :slug, :image)";
 
-        $req = $this->_connexion->prepare($sql);
+        $req = $this->bdd->prepare($sql);
 
         $req->bindValue(':title', $title);
         $req->bindValue(':content', $content);
@@ -43,7 +64,7 @@ class PostManager extends Model
         $inserted = $req->execute();
 
         if(!$inserted){
-            echo "Erreur création" . $this->_connexion->errorInfo();
+            echo "Erreur création" . $this->bdd->errorInfo();
         }
     }
 
@@ -52,7 +73,7 @@ class PostManager extends Model
 
         $sql = "UPDATE post set title = :title, Post_Content = :content, slug = :slug, image = :image  where ID_post = :id";
 
-        $req = $this->_connexion->prepare($sql);
+        $req = $this->bdd->prepare($sql);
 
         $req->bindValue(':title', $title);
         $req->bindValue(':content', $content);
@@ -63,12 +84,12 @@ class PostManager extends Model
         $modified = $req->execute();
 
         if(!$modified){
-            echo "Erreur modification" . $this->_connexion->errorInfo();
+            echo "Erreur modification" . $this->bdd->errorInfo();
         }
     }
 
     public function deletePost($id) {
         $req = "DELETE FROM post where ID_post = '$id'";
-        $this->_connexion->exec($req);
+        $this->bdd->exec($req);
     }
 }

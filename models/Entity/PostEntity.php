@@ -11,10 +11,10 @@ class PostEntity
     private $_user;
     private $_slug;
     private $_image;
-    private $_commentaires = [];
+    private ?array $_commentaires = [];
 
     /* Constructeur */
-    public function __construct($id = null, $title = null, $contenu = null, $dateCreation = null,
+    public function __construct($id, $title, $contenu, $dateCreation,
     $user = null, $slug = null, $image = null, $commentaires = null)
     {
         $this->_id = $id;
@@ -80,7 +80,7 @@ class PostEntity
     /**
      * @return mixed
      */
-    public function getDateCreation()
+    public function getDate()
     {
         return $this->_date;
     }
@@ -134,6 +134,9 @@ class PostEntity
     }
 
 
+    /**
+     * @return array|null
+     */
     public function getCommentaires(){
         return $this->_commentaires;
     }
@@ -153,7 +156,7 @@ class PostEntity
      * Retourne le nombre de commentaires d'un article
      * @return int
      */
-    public function getNombreCommentaires(){
+    public function getNumberCommentaires(){
         return count($this->_commentaires);
     }
 
