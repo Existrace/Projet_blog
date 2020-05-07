@@ -43,11 +43,6 @@ class Post extends Controller {
         /** @var CommentEntity $comments */
         $comments = $post->getCommentaires();
 
-       /* $id =  $post["ID_post"];
-
-        // Récupère les commentaires du post concerné
-        $comments = $commentManager->getCommentsByPost($id);*/
-
         // Si le lien pour le signalement d'un commentaire a été cliqué
         if ($ID_comment != null) {
             $commentManager->reportComment($ID_comment);

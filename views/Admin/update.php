@@ -14,8 +14,8 @@
                             <form method="post">
                                 <div class="input-field col m8 s12">
                                     Nom de l'article
-                                    <input type="text" name='title' required maxlength="80" value=" <?= /** @var PostManager $post */
-                                    $post['title'] ?>"/>
+                                    <input type="text" name='title' required maxlength="80" value=" <?= /** @var PostEntity $post */
+                                    $post->getTitle() ?>"/>
                                 </div>
                                 <div class="input-field col m8 s12">
                                     <div class="file-field input-field">
@@ -24,13 +24,13 @@
                                             <input type="file">
                                         </div>
                                         <div class="file-path-wrapper">
-                                            <input class="file-path validate" name="image" type="text">
+                                            <input class="file-path validate" name="image"value="<?= $post->getImage() ?>" type="text">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="input-field col m12 s12">
                                     <textarea name='content' required maxlength="3000">
-                                        <?= $post['Post_Content'] ?>
+                                        <?= $post->getContent()?>
                                     </textarea>
                                 </div>
                                 <div class="col m12 s12 center">

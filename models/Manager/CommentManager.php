@@ -1,5 +1,6 @@
 <?php
 
+require_once("models/Entity/CommentEntity.php");
 
 class CommentManager extends ManagerMaster
 {
@@ -14,11 +15,19 @@ class CommentManager extends ManagerMaster
 
     public function getAllComments()
     {
-        $req = "SELECT ID_comment, Nickname, Comment_Content, Comment_Date, flag_reporting, title 
-        FROM comment
-        INNER JOIN post ON comment.ID_post = post.ID_post ORDER BY flag_reporting DESC, title";
-        $req = $this->bdd->query($req);
-        return $req->fetchAll();
+        $req = "SELECT * FROM comment ORDER BY flag_reporting DESC";
+        $result = $this->bdd->query($req);
+
+        // Tableau qui va contenir tous les commentaires
+        $comments = [];
+
+        foreach($result as $value){
+            $comments[] = new CommentEntity($value['ID_comment'], $value['Nickname'],
+                $value['Comment_Content'], $value['Comment_Date'], $value['ID_post'],
+                $value['flag_reporting']);
+        }
+
+        return $comments;
     }
 
 

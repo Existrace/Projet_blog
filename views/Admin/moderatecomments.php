@@ -15,35 +15,38 @@
                         <h5> Gestion des commentaires </h5>
                         <div class="container">
                             <!-- Affichage des articles -->
-                            <?php /** @var array $comments */
-                            foreach ($comments as $comment): ?>
-                                <div class="row" style="opacity: 0.79;">
-                                    <div class="col m12 s12 l12">
-                                        <div class="card black-text">
-                                            <div class="card-content">
-                                                <!--<p><?/*= $comment['Post_Date'] */?> </p>-->
-                                                <span class="center title_post">
-                                                    Soumis par <strong><?= $comment['Nickname'] ?></strong>, le <?= $comment['Comment_Date'] ?><br/>
-                                                    Article concerné : <strong><?= $comment['title'] ?></strong>
-                                                </span>
-                                                <hr/>
-                                                <p>
-                                                    <?= $comment['Comment_Content'] ?>
-                                                </p>
-                                                <p class="red-text">
-                                                    <?php if ($comment['flag_reporting'] == 1) {
-                                                        echo "Ce commentaire a été signalé";
-                                                    }
-                                                    ?>
+                            <?php /** @var CommentEntity $comment */
+                            /** @var PostEntity $post */
+                            if (!empty($comments)) {
+                                foreach ($comments as $comment): ?>
+                                    <div class="row" style="opacity: 0.79;">
+                                        <div class="col m12 s12 l12">
+                                            <div class="card black-text">
+                                                <div class="card-content">
+                                                    <!--<p><?/*= $comment['Post_Date'] */?> </p>-->
+                                                    <span class="center title_post">
+                                                        Soumis par <strong><?= $comment->getNickname() ?></strong>, le <?= $comment->getDateCreation() ?><br/>
+                                                        Article concerné : <strong><?= $comment->getPost() ?></strong>
+                                                    </span>
                                                     <hr/>
-                                                </p>
-                                                <a href="/admin/moderatecomments/<?= $comment['ID_comment'] ?>"> Supprimer </a>
-                                            </div>
+                                                    <p>
+                                                        <?= $comment->getContent() ?>
+                                                    </p>
+                                                    <p class="red-text">
+                                                        <?php if ($comment->getFlag() == 1) {
+                                                            echo "Ce commentaire a été signalé";
+                                                        }
+                                                        ?>
+                                                        <hr/>
+                                                    </p>
+                                                    <a href="/admin/moderatecomments/<?= $comment->getId() ?>"> Supprimer </a>
+                                                </div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
+                                <?php endforeach;
+                            } ?>
                             <p>
                                 <a class="black-text text-lighten-3" href="/admin/index"> <i class="tiny material-icons">keyboard_return</i>
                                     Retour à l'accueil administrateur </a>

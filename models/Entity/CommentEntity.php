@@ -8,18 +8,18 @@ class CommentEntity
     private $_nickname;
     private $_content;
     private $_date;
-    private $_post;
+    private  $_post;
     private $_flag;
 
     /* Constructeur */
-    public function __construct($id = null, $nickname = null, $content = null, $date = null,
-                                $post = null) {
+    public function __construct($id, $nickname, $content, $date,
+                                $post, $flag = null) {
         $this->_id = $id;
         $this->_nickname = $nickname;
         $this->_content = $content;
         $this->_date = $date;
         $this->_post = $post;
-        $this->_flag = 0; // Met le signalement (flag) en false par défaut
+        $this->_flag = $flag; // Met le signalement (flag) en false par défaut
     }
 
 
@@ -112,6 +112,5 @@ class CommentEntity
     {
         $this->_flag = $flag;
     }
-
 
 }

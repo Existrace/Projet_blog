@@ -14,7 +14,7 @@
                             <form method="post">
                                 <div class="input-field col m8 s12">
                                     Nom de l'article
-                                    <input type="text" name='title' required maxlength="80"/>
+                                    <input type="text" name='title' required maxlength="80" value=""/>
                                 </div>
                                 <div class="input-field col m8 s12">
                                     <div class="file-field input-field">
@@ -22,13 +22,15 @@
                                             <span>Image de l'article</span>
                                             <input type="file">
                                         </div>
-                                        <div>
+                                        <div class="file-path-wrapper">
                                             <input class="file-path validate" name="image" type="text">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="input-field col m12 s12">
-                                    <textarea name='content' required maxlength="3000"></textarea>
+                                    <textarea name='content' required maxlength="3000">
+
+                                    </textarea>
                                 </div>
                                 <div class="col m12 s12 center">
                                     <button class="btn waves-effect waves-light blue-grey" type="submit" name="submit">
@@ -40,7 +42,7 @@
                         </div>
                         <hr/>
                         <p>
-                            <a class="black-text text-lighten-3" href="index"> <i class="tiny material-icons">keyboard_return</i>
+                            <a class="black-text text-lighten-3" href="/admin/index"> <i class="tiny material-icons">keyboard_return</i>
                                 Retour à l'accueil administrateur </a>
                         </p>
                     </div>

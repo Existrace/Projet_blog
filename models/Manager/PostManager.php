@@ -1,6 +1,7 @@
 <?php
 
 require_once("models/Manager/ManagerMaster.php");
+require_once("models/Entity/PostEntity.php");
 
 /*
  *  Manager qui s'occupe de la gestion de l'entité Post
@@ -23,13 +24,21 @@ class PostManager extends ManagerMaster
             $value['slug'], $value['image'], $comments);
         }
 
+        // Retourne un tableau d'objet Post
         return $posts;
     }
 
     public function getPostById($id) {
         $req = $this->bdd->prepare("SELECT * FROM post where ID_post = ?");
         $req->execute(array($id));
-        return $req->fetch();
+        $data = $req->fetch();
+
+        // Récupération des commentaires du post
+        $commentManager = new CommentManager( $this->bdd);
+        $comments = $commentManager->getCommentsByPost($data['ID_post']);
+
+        return new PostEntity($data['ID_post'], $data['title'], $data['Post_Content'], $data['Post_Date'], $data['ID_Admin'],
+            $data['slug'], $data['image'], $comments);
     }
 
     /*
@@ -49,17 +58,18 @@ class PostManager extends ManagerMaster
     }
 
 
-    public function createPost($title, $content, $idAuthor, $slug, $image) {
-        $sql = "INSERT INTO post (title, Post_Content, Post_Date, ID_Admin, slug, image)
-        VALUES (:title, :content, NOW(), :idadmin, :slug, :image)";
+    public function createPost(PostEntity $post) {
+        $sql = 'INSERT INTO post (title, Post_Content, Post_Date, ID_Admin, slug, image)
+        VALUES (:title, :content, :date, :idadmin, :slug, :image)';
 
         $req = $this->bdd->prepare($sql);
 
-        $req->bindValue(':title', $title);
-        $req->bindValue(':content', $content);
-        $req->bindValue(':idadmin', $idAuthor);
-        $req->bindValue(':slug', $slug);
-        $req->bindValue(':image', $image);
+        $req->bindValue(':title', $post->getTitle());
+        $req->bindValue(':content', $post->getContent());
+        $req->bindValue(':date', $post->getDate());
+        $req->bindValue(':idadmin', $post->getUser());
+        $req->bindValue(':slug', $post->getSlug());
+        $req->bindValue(':image', $post->getImage());
 
         $inserted = $req->execute();
 
@@ -69,17 +79,18 @@ class PostManager extends ManagerMaster
     }
 
 
-    public function updatePost($id, $title, $content, $slug, $image)  {
+    public function updatePost(PostEntity $post)  {
 
-        $sql = "UPDATE post set title = :title, Post_Content = :content, slug = :slug, image = :image  where ID_post = :id";
+        $sql = "UPDATE post 
+        set title = :title, Post_Content = :content, slug = :slug, image = :image where ID_post = :id";
 
         $req = $this->bdd->prepare($sql);
 
-        $req->bindValue(':title', $title);
-        $req->bindValue(':content', $content);
-        $req->bindValue(':slug', $slug);
-        $req->bindValue(':id', $id);
-        $req->bindValue(':image', $image);
+        $req->bindValue(':title', $post->getTitle());
+        $req->bindValue(':content', $post->getContent());
+        $req->bindValue(':slug', $post->getSlug());
+        $req->bindValue(':id', $post->getId());
+        $req->bindValue(':image', $post->getImage());
 
         $modified = $req->execute();
 

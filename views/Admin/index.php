@@ -30,28 +30,30 @@
 
                         <div class="container">
                             <!-- Affichage des articles -->
-                            <?php /** @var PostManager $posts */
-                            foreach ($posts as $post): ?>
-                                <div class="row" style="opacity: 0.79;">
-                                    <div class="col m12 s12 l12">
-                                        <div class="card black-text">
-                                            <div class="card-content">
-                                                <p><?= $post['Post_Date'] ?> </p>
-                                                <span class="card-title center title_post">
-                                                    <a class="title_post"
-                                                      href="/post/show/<?= $post['slug'] ?>"><?= $post['title'] ?></a>
-                                                </span>
-                                                <hr/>
-                                                <a
-                                                   href="/admin/update/<?= $post['ID_post'] ?>"> Modifier</a>
-                                                |
-                                                <a
-                                                   href="/post/deletepost/<?= $post['ID_post'] ?>"> Supprimer</a>
+                            <?php /** @var PostEntity $post */
+                            if (!empty($posts)) {
+                                foreach ($posts as $post): ?>
+                                    <div class="row" style="opacity: 0.79;">
+                                        <div class="col m12 s12 l12">
+                                            <div class="card black-text">
+                                                <div class="card-content">
+                                                    <p><?= $post->getDate() ?> </p>
+                                                    <span class="card-title center title_post">
+                                                        <a class="title_post"
+                                                          href="/post/show/<?= $post->getSlug() ?>"><?= $post->getTitle() ?></a>
+                                                    </span>
+                                                    <hr/>
+                                                    <a
+                                                       href="/admin/update/<?= $post->getId() ?>"> Modifier</a>
+                                                    |
+                                                    <a
+                                                       href="/post/deletepost/<?= $post->getId() ?>"> Supprimer</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
+                                <?php endforeach;
+                            } ?>
                         </div>
 
                         <hr/>

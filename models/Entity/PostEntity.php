@@ -15,7 +15,7 @@ class PostEntity
 
     /* Constructeur */
     public function __construct($id, $title, $contenu, $dateCreation,
-    $user = null, $slug = null, $image = null, $commentaires = null)
+                                $user = null, $slug = null, $image = null, $commentaires = null)
     {
         $this->_id = $id;
         $this->_title = $title;

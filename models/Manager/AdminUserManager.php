@@ -1,5 +1,6 @@
 <?php
 
+require_once("models/Manager/ManagerMaster.php");
 
 class AdminUserManager extends ManagerMaster
 {
