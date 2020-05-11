@@ -15,8 +15,8 @@ class Comment extends Controller
 
         // Récupération des données pour la création d'un commentaire
         if(isset($_POST['submit']) && !empty($_POST['nickname']) && !empty($_POST['content'])){
-            $nickname = $_POST['nickname'];
-            $content = $_POST['content'];
+            $nickname = htmlspecialchars($_POST['nickname']);
+            $content = htmlspecialchars($_POST['content']);
             $date = date('Y-m-d G-H-s');
 
             // Création d'un objet Comment

@@ -11,22 +11,25 @@ class Admin extends Controller
     {
         // Connexion administrateur
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['admin'])) {
-            $admin = $_POST['admin'];
-            $pass = $_POST['pass'];
-
+            $login = htmlspecialchars($_POST['admin']);
+            $pass = htmlspecialchars($_POST['pass']);
             // Création d'une instance pdo
             $db = Model::getPdo();
 
             $adminUserManager = new AdminUserManager($db);
 
             // Si les identifiants existent dans la base de données
-            if ($adminUserManager->getUser($admin, $pass)) {
+            if ($adminUserManager->verifyUser($login)) {
+                // Récupération d'une instance d'AdminUser correspondant au login
+                $admin = $adminUserManager->getUser($login);
+                if(password_verify($pass, $admin->getPassword())) {
+                    // Enregistrement de l'ident en tant que variable de session
+                    $_SESSION['login'] = $login;
 
-                // Enregistrement de l'ident en tant que vaiable de session
-                $_SESSION['login'] = $admin = $_POST['admin'];
-
-                header('Location:/admin/index');
-
+                    header('Location:/admin/index');
+                }else{
+                    echo "Le mot de passe ne correspond pas.";
+                }
             } else {
                 ECHO "Echec authentification";
             }
@@ -118,12 +121,12 @@ class Admin extends Controller
                 date_default_timezone_set('Europe/Paris');
 
                 // Récupération des données du formulaire
-                $title = $_POST['title'];
-                $content = $_POST['content'];
-                $date = date('Y-m-d G-H-s');
-                $idAdmin = $adminManager->getIdUser($_SESSION['login']);
+                $title = htmlspecialchars($_POST['title']);
+                $content = htmlspecialchars($_POST['content']);
+                $date = htmlspecialchars(date('Y-m-d G-H-s'));
+                $idAdmin = htmlspecialchars($adminManager->getUser($_SESSION['login']));
                 $slug = Miscellaneous::slugify($title);
-                $image = $_POST['image'];
+                $image = htmlspecialchars($_POST['image']);
 
                 $post = new PostEntity(null, $title, $content, $date, $idAdmin[0], $slug, $image);
                 $postManager->createPost($post);
@@ -148,12 +151,12 @@ class Admin extends Controller
             if (isset($_POST['submit']) && !empty($_POST['title']) && !empty($_POST['content'])) {
 
                 // Modification d'un article
-                $title = $_POST['title'];
-                $content = $_POST['content'];
-                $date = date('Y-m-d G-H-s');
-                $idAdmin = $adminManager->getIdUser($_SESSION['login']);
+                $title = htmlspecialchars($_POST['title']);
+                $content = htmlspecialchars($_POST['content']);
+                $date = htmlspecialchars(date('Y-m-d G-H-s'));
+                $idAdmin = htmlspecialchars($adminManager->getUser($_SESSION['login']));
                 $slug = Miscellaneous::slugify($title);
-                $image = $_POST['image'];
+                $image = htmlspecialchars($_POST['image']);
 
                 // Objet post à mettre à jour
                 $postToUpdate = new PostEntity($ID_post, $title, $content, $date, $idAdmin[0], $slug, $image);

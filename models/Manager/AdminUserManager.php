@@ -1,15 +1,15 @@
 <?php
 
 require_once("models/Manager/ManagerMaster.php");
+require_once("models/Entity/AdminUserEntity.php");
 
 class AdminUserManager extends ManagerMaster
 {
 
     /* Vérifier si l'utilisateur existe */
-    public function getUser($user, $mdp) {
-            $req = $this->bdd->prepare("SELECT * FROM adminuser WHERE Username = :user AND Password = :mdp");
+    public function verifyUser($user) {
+            $req = $this->bdd->prepare("SELECT * FROM adminuser WHERE Username = :user");
             $req->bindValue(':user', $user, PDO::PARAM_STR);
-            $req->bindValue(':mdp', $mdp, PDO::PARAM_STR);
             $req->execute();
             $data = $req->fetch();
 
@@ -20,10 +20,11 @@ class AdminUserManager extends ManagerMaster
             }
     }
 
-    public function getIdUser($username) {
-        $req = $this->bdd->prepare("SELECT ID_Admin FROM adminuser WHERE Username = :username");
-        $req->bindValue(':username', $username);
+    public function getUser($user) {
+        $req = $this->bdd->prepare("SELECT * FROM adminuser WHERE Username = :user");
+        $req->bindValue(':user', $user);
         $req->execute();
-        return $req->fetch();
+        $data = $req->fetch();
+        return new AdminUserEntity($data['ID_Admin'], $data['Username'], $data['Password'], $data['User_Email']);
     }
 }
