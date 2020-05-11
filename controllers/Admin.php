@@ -126,10 +126,9 @@ class Admin extends Controller
                 $image = $_POST['image'];
 
                 $post = new PostEntity(null, $title, $content, $date, $idAdmin[0], $slug, $image);
-                var_dump("Le postEntity :", $post);
                 $postManager->createPost($post);
 
-                //header('Location:/admin/index');
+                header('Location:/admin/index');
             }
             $this->render('create', ['idents' => $_SESSION]);
         }
@@ -138,24 +137,26 @@ class Admin extends Controller
 
     public function update($ID_post)
     {
+
+        // Création d'une instance pdo
+        $db = Model::getPdo();
+        $adminManager = new AdminUserManager($db);
+        $postManager = new PostManager($db);
+
         if (isset($_SESSION['login'])) {
-
-            // Création d'une instance pdo
-            $db = Model::getPdo();
-
-            $postManager = new PostManager($db);
-
             // Récupération des données pour la modification d'un article
             if (isset($_POST['submit']) && !empty($_POST['title']) && !empty($_POST['content'])) {
 
                 // Modification d'un article
                 $title = $_POST['title'];
                 $content = $_POST['content'];
+                $date = date('Y-m-d G-H-s');
+                $idAdmin = $adminManager->getIdUser($_SESSION['login']);
                 $slug = Miscellaneous::slugify($title);
                 $image = $_POST['image'];
 
                 // Objet post à mettre à jour
-                $postToUpdate = new PostEntity($ID_post, $title, $content, $slug, $image);
+                $postToUpdate = new PostEntity($ID_post, $title, $content, $date, $idAdmin[0], $slug, $image);
                 // Récupération du post à modifier
                 /** @var PostEntity $post */
 

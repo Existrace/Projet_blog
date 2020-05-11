@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="input-field col m12 s12">
                                         Commentaire
-                                        <textarea class="materialize-textarea" name="content" required maxlength="4"></textarea>
+                                        <textarea class="materialize-textarea" name="content" required maxlength="400"></textarea>
                                     </div>
                                     <div class="col m12 s12">
                                         <button class="btn waves-effect waves-light blue-grey" type="submit"

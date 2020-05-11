@@ -8,12 +8,21 @@ class Comment extends Controller
     Méthode appellée dans la vue post/show
     */
     public function createcomments($slug, $ID_post) {
-        $commentManager = new CommentManager();
+
+        // Création d'une instance pdo
+        $db = Model::getPdo();
+        $commentManager = new CommentManager($db);
+
         // Récupération des données pour la création d'un commentaire
         if(isset($_POST['submit']) && !empty($_POST['nickname']) && !empty($_POST['content'])){
             $nickname = $_POST['nickname'];
             $content = $_POST['content'];
-            $commentManager->createComment($nickname, $content , $ID_post);
+            $date = date('Y-m-d G-H-s');
+
+            // Création d'un objet Comment
+            $comment = new CommentEntity(null, $nickname, $content, $date, $ID_post, 0);
+
+            $commentManager->createComment($comment);
             $commentManager->getCommentsByPost($ID_post);
 
             // Reviens à l'article initial (Contrôleur post)

@@ -1,6 +1,7 @@
 <?php
 
 require_once("models/Entity/CommentEntity.php");
+require_once("models/Manager/ManagerMaster.php");
 
 class CommentManager extends ManagerMaster
 {
@@ -31,16 +32,17 @@ class CommentManager extends ManagerMaster
     }
 
 
-    public function createComment($nickname, $content, $idPost)
+    public function createComment(CommentEntity $comment)
     {
         $sql = "INSERT INTO comment ( Nickname, Comment_Content, Comment_Date, ID_post)
-        VALUES (:nickname, :content, NOW(), :idPost)";
+        VALUES (:nickname, :content, :date, :idPost)";
 
         $req = $this->bdd->prepare($sql);
 
-        $req->bindValue(':nickname', $nickname);
-        $req->bindValue(':content', $content);
-        $req->bindValue(':idPost', $idPost);
+        $req->bindValue(':nickname', $comment->getNickname());
+        $req->bindValue(':content', $comment->getContent());
+        $req->bindValue(':date', $comment->getDateCreation());
+        $req->bindValue(':idPost', $comment->getPost());
 
         $inserted = $req->execute();
 

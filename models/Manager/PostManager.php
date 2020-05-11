@@ -82,12 +82,14 @@ class PostManager extends ManagerMaster
     public function updatePost(PostEntity $post)  {
 
         $sql = "UPDATE post 
-        set title = :title, Post_Content = :content, slug = :slug, image = :image where ID_post = :id";
+        set title = :title, Post_Content = :content, Post_Date = :date, ID_Admin = :idadmin, slug = :slug, image = :image where ID_post = :id";
 
         $req = $this->bdd->prepare($sql);
 
         $req->bindValue(':title', $post->getTitle());
         $req->bindValue(':content', $post->getContent());
+        $req->bindValue(':date', $post->getDate());
+        $req->bindValue(':idadmin', $post->getUser());
         $req->bindValue(':slug', $post->getSlug());
         $req->bindValue(':id', $post->getId());
         $req->bindValue(':image', $post->getImage());
