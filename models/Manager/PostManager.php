@@ -1,8 +1,5 @@
 <?php
 
-require_once("models/Manager/ManagerMaster.php");
-require_once("models/Entity/PostEntity.php");
-
 /*
  *  Manager qui s'occupe de la gestion de l'entité Post
  *  */

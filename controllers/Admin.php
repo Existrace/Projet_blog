@@ -1,9 +1,9 @@
 <?php
 
-require_once("models/Manager/AdminUserManager.php");
-require_once("models/Manager/PostManager.php");
-require_once("models/Manager/CommentManager.php");
-require_once("Services/Miscellaneous.php");
+// TROUVER UNE SOLUTION POUR UTILISER LE NAMESPACE COMME AVEC LOADER
+// ET PLUS UTILISER LE REQUIRE
+require_once("services/Utils.php");
+use ProjetBlog\Services\Utils;
 
 class Admin extends Controller
 {
@@ -123,12 +123,12 @@ class Admin extends Controller
                 // Récupération des données du formulaire
                 $title = htmlspecialchars($_POST['title']);
                 $content = htmlspecialchars($_POST['content']);
-                $date = htmlspecialchars(date('Y-m-d G-H-s'));
-                $idAdmin = htmlspecialchars($adminManager->getUser($_SESSION['login']));
-                $slug = Miscellaneous::slugify($title);
+                $date = date('Y-m-d G-H-s');
+                $idAdmin = $adminManager->getUser($_SESSION['login'])->getId();
+                $slug = Utils::slugify($title);
                 $image = htmlspecialchars($_POST['image']);
 
-                $post = new PostEntity(null, $title, $content, $date, $idAdmin[0], $slug, $image);
+                $post = new PostEntity(null, $title, $content, $date, $idAdmin, $slug, $image);
                 $postManager->createPost($post);
 
                 header('Location:/admin/index');
@@ -153,13 +153,13 @@ class Admin extends Controller
                 // Modification d'un article
                 $title = htmlspecialchars($_POST['title']);
                 $content = htmlspecialchars($_POST['content']);
-                $date = htmlspecialchars(date('Y-m-d G-H-s'));
-                $idAdmin = htmlspecialchars($adminManager->getUser($_SESSION['login']));
-                $slug = Miscellaneous::slugify($title);
+                $date = date('Y-m-d G-H-s');
+                $idAdmin = $idAdmin = $adminManager->getUser($_SESSION['login'])->getId();
+                $slug = Utils::slugify($title);
                 $image = htmlspecialchars($_POST['image']);
 
                 // Objet post à mettre à jour
-                $postToUpdate = new PostEntity($ID_post, $title, $content, $date, $idAdmin[0], $slug, $image);
+                $postToUpdate = new PostEntity($ID_post, $title, $content, $date, $idAdmin, $slug, $image);
                 // Récupération du post à modifier
                 /** @var PostEntity $post */
 

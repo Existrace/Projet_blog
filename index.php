@@ -1,11 +1,31 @@
 <?php
+
+namespace ProjetBlog;
+
+use Post;
+use ProjetBlog\Services as S;
+
 // Genère une constante contenant le chemin vers la racine du projet
 define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
+define('ROOT_PATH', __DIR__ . '/');
 
 // Appelle le modèle et le contrôleur principal
 require_once(ROOT . 'app/Model.php');
 require_once(ROOT . 'app/Controller.php');
 
+try
+{
+    // Lancement autoloader
+    require "services/Loader.php";
+    $loader = S\Loader::getInstance();
+    $loader->init();
+}
+catch (\Exception $oE)
+{
+    echo $oE->getMessage();
+}
+
+// Démarre la session pour la connexion admin
 session_start();
 
 // Séparation des paramètres pour les mettre dans le tableau $params

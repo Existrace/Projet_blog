@@ -1,8 +1,5 @@
 <?php
 
-require_once("models/Manager/ManagerMaster.php");
-require_once("models/Entity/AdminUserEntity.php");
-
 class AdminUserManager extends ManagerMaster
 {
 

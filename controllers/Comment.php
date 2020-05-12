@@ -1,7 +1,5 @@
 <?php
 
-require_once("models/Manager/CommentManager.php");
-
 class Comment extends Controller
 {
     /*

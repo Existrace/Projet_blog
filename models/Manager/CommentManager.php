@@ -1,8 +1,5 @@
 <?php
 
-require_once("models/Entity/CommentEntity.php");
-require_once("models/Manager/ManagerMaster.php");
-
 class CommentManager extends ManagerMaster
 {
     /* Récupère les commentaires d'un post passé en paramètre */

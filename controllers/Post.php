@@ -1,11 +1,5 @@
 <?php
 
-/* Améliorer avec spl_autoload_register */
-require_once("models/Manager/PostManager.php");
-require_once("models/Manager/CommentManager.php");
-require_once("models/Entity/PostEntity.php");
-
-
 class Post extends Controller {
 
     /**
