@@ -4,7 +4,7 @@
  * Cette classe est la base de tous les managers,
  * où toutes les méthodes propres à tous se trouvent ici
  */
-abstract class ManagerMaster
+abstract class Manager
 {
     /* Attribut */
     protected PDO $bdd;

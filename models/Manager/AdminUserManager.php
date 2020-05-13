@@ -1,6 +1,6 @@
 <?php
 
-class AdminUserManager extends ManagerMaster
+class AdminUserManager extends Manager
 {
 
     /* Vérifier si l'utilisateur existe */

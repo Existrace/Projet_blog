@@ -3,7 +3,7 @@
 /*
  *  Manager qui s'occupe de la gestion de l'entité Post
  *  */
-class PostManager extends ManagerMaster
+class PostManager extends Manager
 {
 
     public function getPosts() {

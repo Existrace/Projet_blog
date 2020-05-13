@@ -1,9 +1,8 @@
 <?php
 
-// TROUVER UNE SOLUTION POUR UTILISER LE NAMESPACE COMME AVEC LOADER
-// ET PLUS UTILISER LE REQUIRE
-require_once("services/Utils.php");
 use ProjetBlog\Services\Utils;
+
+require_once("services/Utils.php");
 
 class Admin extends Controller
 {

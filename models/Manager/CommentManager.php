@@ -1,6 +1,6 @@
 <?php
 
-class CommentManager extends ManagerMaster
+class CommentManager extends Manager
 {
     /* Récupère les commentaires d'un post passé en paramètre */
     public function getCommentsByPost($id_post)

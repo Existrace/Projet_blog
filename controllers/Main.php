@@ -1,6 +1,6 @@
 <?php
 
-class Post extends Controller {
+class Main extends Controller {
 
     /**
      * Fonction affichant tous les billets de blog
