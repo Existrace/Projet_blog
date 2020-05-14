@@ -2,7 +2,7 @@
 
 namespace ProjetBlog\core\Router;
 
-use Main;
+use Post;
 
 /**
  * Class Router
@@ -46,10 +46,10 @@ class Router
         } else {
             // Si aucun paramètre n'est défini
             // On appelle le contrôleur par défaut
-            require_once(ROOT . 'controllers/Main.php');
+            require_once(ROOT . 'controllers/Post.php');
 
             // Instantiation du contrôleur
-            $controller = new Main();
+            $controller = new Post();
 
             $controller->index();
 
