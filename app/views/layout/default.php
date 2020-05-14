@@ -6,9 +6,9 @@
     <title>Blog de Jean Forteroche</title>
 
     <!--CSS-->
-    <link rel="stylesheet" href="/public/css/materialize.css"/>
+    <link rel="stylesheet" href="/app/public/css/materialize.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/index.css"/>
+    <link rel="stylesheet" href="/app/public/css/index.css"/>
     <script src="https://cdn.tiny.cloud/1/svt8v3ibfujxndf9ncnxnnzi2x0g484y1e9uv1z4gp09g2ml/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
 
@@ -16,7 +16,7 @@
 
 <body>
 
-<div class="card-panel" style="background-size: cover; background-image: url('/public/images/landscape-2124756_1280.jpg');">
+<div class="card-panel" style="background-size: cover; background-image: url('/app/public/images/landscape-2124756_1280.jpg');">
     <h2 class="center white-text" style="font-weight: bold;
         font-family: 'FunSized', serif;">
         Blog de Jean Forteroche
@@ -35,9 +35,9 @@
 </main>
 
 <!-- Trouver un footer -->
-<script type="text/javascript" src="/public/js/materialize.js"></script>
-<script type="text/javascript" src="/public/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="/public/js/jsform.js"></script>
+<script type="text/javascript" src="/app/public/js/materialize.js"></script>
+<script type="text/javascript" src="/app/public/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/app/public/js/jsform.js"></script>
 
 
 </body>

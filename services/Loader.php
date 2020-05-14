@@ -36,8 +36,8 @@ class Loader
     {
         /* Pas meilleure solution pour l'instant */
         $paths = array(
-            'models/Manager',
-            'models/Entity',
+            'app/models/Manager',
+            'app/models/Entity',
             'Services/'
         );
         foreach($paths as $path) {

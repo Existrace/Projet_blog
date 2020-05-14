@@ -41,12 +41,12 @@ class Router
             } else {
                 // On envoie le code réponse 404
                 http_response_code(404);
-                require_once("views/404page.php");
+                require_once("app/views/404page.php");
             }
         } else {
             // Si aucun paramètre n'est défini
             // On appelle le contrôleur par défaut
-            require_once(ROOT . 'controllers/Post.php');
+            require_once(ROOT . '/app/controllers/Post.php');
 
             // Instantiation du contrôleur
             $controller = new Post();

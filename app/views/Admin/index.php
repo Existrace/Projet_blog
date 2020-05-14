@@ -16,10 +16,10 @@
                         <p>Ici vous pouvez gérer vos article et modérer les commentaires</p>
                         <div class="row">
                             <div class="col m6 s12" style="padding: 20px">
-                                <a class="link_stylised" href="moderatecomments"> Modérer les commentaires</a>
+                                <a class="link_stylised" href="../../../index.php"> Modérer les commentaires</a>
                             </div>
                             <div class="col m6 s12" style="padding: 20px">
-                                <a class="link_stylised" href="create"> Création d'un nouvel article</a>
+                                <a class="link_stylised" href="../../../index.php"> Création d'un nouvel article</a>
                             </div>
                         </div>
 

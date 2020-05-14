@@ -14,13 +14,13 @@ abstract class Controller {
         // Démarre le buffer de sortie pour le chargement des vues
         ob_start();
 
-        require_once(ROOT.'views/'.strtolower(get_class($this)).'/'.$view.'.php');
+        require_once(ROOT.'app/views/'.strtolower(get_class($this)).'/'.$view.'.php');
 
         /** @var string $content */
         $content = ob_get_clean();
 
         // On fabrique le "template"
-        require_once(ROOT.'views/layout/default.php');
+        require_once(ROOT.'/app/views/layout/default.php');
 
     }
 }
