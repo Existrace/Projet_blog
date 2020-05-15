@@ -2,7 +2,6 @@
 
 namespace ProjetBlog\core\Router;
 
-use Post;
 
 /**
  * Class Router
@@ -10,9 +9,96 @@ use Post;
 class Router
 {
     /**
-     * @param array $param
+     * Tableau associatif des routes
+     * @var array
      */
-    public function run(array $param) {
+    protected array $routes = [];
+
+    /**
+     * Paramètres des routes matchées
+     * @var array
+     */
+    protected array $params = [];
+
+    public function __construct()
+    {
+        // Récupération des routes existantes
+        /*
+         * TODO : Voir s'il faut tablir les routes dans config
+         * JE NE SAIS PAS ENCORE GERER LES PARAMTRES SUR LES ROUTES
+         * ENLEVER TOUS LES PARAMETRES ?? COGITER ENCORE
+         * */
+    }
+
+
+    /**
+     * Ajout d'une route
+     * @param $route
+     * @param $param
+     */
+    public function add($route, $param) {
+        // Converti la route avec une regex
+        $route = preg_replace('/{([a-z]+):([^\}]+)}/', '(?P<\1/>\2)', $route);
+        $route = '#^'.$route.'$#';
+        $this->routes[$route] = $param;
+    }
+
+    /**
+     * Match la route avec les routes existantes,
+     * paramétrant les paramètres si une route est trouvée
+     * @return bool
+     */
+    public function match() {
+        $url = trim($_SERVER['REQUEST_URI'], '/');
+        // Parcours les routes existantes
+        foreach ($this->routes as $route => $params) {
+            if (preg_match($route, $url, $matches)) {
+                foreach ($matches as $key => $match) {
+                    if (is_string($key)) {
+                        if(is_numeric($match)) {
+                            $match = (int) $match;
+                        }
+                        $params[$key] = $match;
+                    }
+                }
+                $this->params = $params;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function run() {
+        if ($this->match()) {
+            // Chemin à vérifier
+            $path = 'app\controllers\\'.ucfirst($this->params['controller']).'Controller';
+            if (class_exists($path)) {
+                $action = $this->params['action'].'Action';
+                if (method_exists($path, $action)) {
+                    $controller = new $path($this->params);
+                    $controller->$action();
+                } else {
+                    // Déterminer par la suite...
+                    // Error 404
+                }
+            } else {
+                // Error 404
+            }
+        } else {
+            // Error 404
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+   /* public function run(array $param) {
 
         // Si au moins un paramètre existe
         if ($param[0] != "") {
@@ -54,5 +140,5 @@ class Router
             $controller->index();
 
         }
-    }
+    }*/
 }
