@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-content">
                         <p class="black-text"> Publié par Admin le <?= $post->getDate(); ?> </p><br>
-                        <img height="80%" width="80%" src="/public/images/<?= $post->getImage(); ?>"><hr/>
+                        <img height="80%" width="80%" src="/app/public/images/<?= $post->getImage(); ?>"><hr/>
                         <p> <?= $post->getContent(); ?></p>
 
                         <hr>

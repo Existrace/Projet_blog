@@ -12,7 +12,7 @@
                 <div class="col m6 s12 center">
                     <div class="card big hoverable">
                         <div class="card-image">
-                            <img class="image_article" src="/public/images/<?= $post->getImage(); ?>" alt="image_article">
+                            <img class="image_article" src="/app/public/images/<?= $post->getImage(); ?>" alt="image_article">
                             <a class="link_stylised"
                                href="/post/show/<?= $post->getSlug();  ?>"><?= $post->getTitle(); ?></a>
                             <p style="padding: 10px;"> <?= $post->getDate(); ?>

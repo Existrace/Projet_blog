@@ -14,7 +14,6 @@ require_once(ROOT . 'core/Controller.php');
 require_once(ROOT . 'core/Manager.php');
 require_once(ROOT . 'core/Router.php');
 
-
 try
 {
     // Lancement autoloader
@@ -33,8 +32,11 @@ session_start();
 // Séparation des paramètres pour les mettre dans le tableau $params
 $param = explode('/', $_GET['p']);
 
-// Démarre le routeur
-$router = new Router();
+// DEFINITION DE LA PAGE PAR DEFAUT
+$location = "/post/index";
+
+// Démarre le routeur en définissant une page par défaut
+$router = new Router($location);
 $router->run($param);
 
 
