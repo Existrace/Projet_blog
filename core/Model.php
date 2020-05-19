@@ -8,15 +8,17 @@
 class Model
 {
     public static PDO $myBd;
-    /* Attributs propres à la connexion de la base de donnéesv*/
+    /* Attributs propres à la connexion de la base de données */
     private static string $_host = "localhost";
     private static string $_bdd = "blog_jean";
     private static string $_user = "root";
     private static string $_password = "";
 
-    /* Cette méthode a besoin d'être appllée (sans instantiation de la classe)
+    /**
+    Cette méthode a besoin d'être appllée (sans instantiation de la classe)
     pour avoir accès à la base de données
-    */
+     * @return PDO
+     */
     static function getPdo()
     {
         try {

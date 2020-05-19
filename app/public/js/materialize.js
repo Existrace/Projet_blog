@@ -6767,7 +6767,7 @@ $jscomp.polyfill = function (e, r, p, m) {
       }
 
       /**
-       * Render dropdown content
+       * View dropdown content
        * @param {Object} data  data set
        * @param {String} val  current input value
        */
@@ -6807,7 +6807,7 @@ $jscomp.polyfill = function (e, r, p, m) {
           matchingData.sort(sortFunctionBound);
         }
 
-        // Render
+        // View
         for (var i = 0; i < matchingData.length; i++) {
           var _entry = matchingData[i];
           var $autocompleteOption = $('<li></li>');
@@ -7666,7 +7666,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         _this45.$input.attr('id', M.guid());
       }
 
-      // Render initial chips
+      // View initial chips
       if (_this45.options.data.length) {
         _this45.chipsData = _this45.options.data;
         _this45._renderChips(_this45.chipsData);
@@ -7827,7 +7827,7 @@ $jscomp.polyfill = function (e, r, p, m) {
       }
 
       /**
-       * Render Chip
+       * View Chip
        * @param {chip} chip
        * @return {Element}
        */
@@ -7859,7 +7859,7 @@ $jscomp.polyfill = function (e, r, p, m) {
       }
 
       /**
-       * Render Chips
+       * View Chips
        */
 
     }, {
@@ -8768,13 +8768,13 @@ $jscomp.polyfill = function (e, r, p, m) {
 
     isRTL: false,
 
-    // Render the month after year in the calendar title
+    // View the month after year in the calendar title
     showMonthAfterYear: false,
 
-    // Render days of the calendar grid that fall in the next or previous month
+    // View days of the calendar grid that fall in the next or previous month
     showDaysInNextAndPreviousMonths: false,
 
-    // Specify a DOM element to render the calendar in
+    // Specify a DOM element to View the calendar in
     container: null,
 
     // Show clear button
@@ -9060,7 +9060,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         this.adjustCalendars();
       }
     }, {
-      key: "render",
+      key: "View",
       value: function render(year, month, randId) {
         var opts = this.options,
             now = new Date(),

@@ -8,16 +8,21 @@ use ProjetBlog\Services as S;
 // Genère une constante contenant le chemin vers la racine du projet
 define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
-// Appelle le modèle et le contrôleur principal
-require_once(ROOT . 'core/Model.php');
-require_once(ROOT . 'core/Controller.php');
-require_once(ROOT . 'core/Manager.php');
-require_once(ROOT . 'core/Router.php');
+// Appelle le coeur de l'application
+try{
+    require_once(ROOT . 'core/Model.php');
+    require_once(ROOT . 'core/Controller.php');
+    require_once(ROOT . 'core/Manager.php');
+    require_once(ROOT . 'core/Router.php');
+    require_once(ROOT . 'core/Loader.php');
+}catch(\Exception $e) {
+    echo $e->getMessage();
+}
+
 
 try
 {
     // Lancement autoloader
-    require "services/Loader.php";
     $loader = S\Loader::getInstance();
     $loader->init();
 }
