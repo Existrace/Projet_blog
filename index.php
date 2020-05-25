@@ -2,6 +2,7 @@
 
 namespace ProjetBlog;
 
+use ProjetBlog\core\Config;
 use ProjetBlog\core\Router\Router;
 use ProjetBlog\Services as S;
 
@@ -15,6 +16,7 @@ try{
     require_once(ROOT . 'core/Manager.php');
     require_once(ROOT . 'core/Router.php');
     require_once(ROOT . 'core/Loader.php');
+    require_once(ROOT . 'core/Config.php');
 }catch(\Exception $e) {
     echo $e->getMessage();
 }
@@ -38,7 +40,7 @@ session_start();
 $param = explode('/', $_GET['p']);
 
 // DEFINITION DE LA PAGE PAR DEFAUT
-$location = "/post/index";
+$location = Config::MAIN_PAGE;
 
 // Démarre le routeur en définissant une page par défaut
 $router = new Router($location);

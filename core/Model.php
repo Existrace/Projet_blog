@@ -5,14 +5,19 @@
     Pour être appellée dans les contrôleurs
     pour avoir accès à la base de données
 */
+
+use ProjetBlog\core\Config;
+
 class Model
 {
     public static PDO $myBd;
-    /* Attributs propres à la connexion de la base de données */
-    private static string $_host = "localhost";
-    private static string $_bdd = "blog_jean";
-    private static string $_user = "root";
-    private static string $_password = "";
+    /* Attributs propres à la connexion de la base de données
+    Utilisation des constantes de config
+    */
+    private static string $_host = Config::BDD_HOST;
+    private static string $_bdd = Config::BDD_NAME;
+    private static string $_user = Config::BDD_USER;
+    private static string $_password = Config::BDD_PASSWORD;
 
     /**
     Cette méthode a besoin d'être appllée (sans instantiation de la classe)
