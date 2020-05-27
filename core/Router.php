@@ -2,8 +2,6 @@
 
 namespace ProjetBlog\core\Router;
 
-use Post;
-
 /**
  * Class Router
  */

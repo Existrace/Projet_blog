@@ -21,8 +21,13 @@ final class Config
     BDD_USER = "root",
     BDD_PASSWORD = "",
 
+     /*
+      * Nom du Website
+      */
+     SITE_TITLE = "Blog de Jean Forteroche",
+
     /*
      * Première page d'accueil du site
      */
-    MAIN_PAGE = "\"/post/index\"";
+    MAIN_PAGE = "/post/index";
 }
