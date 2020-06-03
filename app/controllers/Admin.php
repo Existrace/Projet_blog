@@ -4,6 +4,10 @@ use ProjetBlog\Services\Utils;
 
 require_once("services/Utils.php");
 
+/**
+ * Contrôleur gérant la connexion et le lien avec les contrôleurs
+ * de Post et Comment
+ */
 class Admin extends Controller
 {
     public function login()
@@ -62,117 +66,6 @@ class Admin extends Controller
             $posts = $postManager->getPosts();
 
             $this->render('index', ['idents' => $_SESSION, 'posts' => $posts]);
-        } else {
-            // Sinon, interdire l'accès à la page
-            $this->render('errorsession');
-        }
-    }
-
-    public function moderatecomments($ID_comment = null)
-    {
-        // Vérifier si un administrateur est connecté
-        if (isset($_SESSION['login'])) {
-
-            // Création d'une instance pdo
-            $db = Model::getPdo();
-
-            // Récupération des données pour la création d'un article
-            $commentManager = new CommentManager($db);
-            $postManager = new PostManager($db);
-            $comments = $commentManager->getAllComments();
-
-            // Récupération du titre de post du commentaire concerné
-            foreach($comments as $value) {
-               $numPost = $value->getPost();
-               $post = $postManager->getPostById($numPost);
-               $titlePost = $post->getTitle();
-               $value->setPost($titlePost);
-            }
-
-            // Gestion suppression d'un commentaire
-            if ($ID_comment != null) {
-                // Suppression commentaire
-                $commentManager->deleteComment($ID_comment);
-                $this->moderatecomments();
-            }
-
-            $this->render('moderatecomments', ['idents' => $_SESSION, 'comments' => $comments]);
-        } else {
-            // Sinon, interdire l'accès à la page
-            $this->render('errorsession');
-        }
-    }
-
-
-    /*
-        Méthode pour créer un article en mode admin
-     */
-    public function create()
-    {
-        if (isset($_SESSION['login'])) {
-            if (isset($_POST['submit']) && !empty($_POST['title']) && !empty($_POST['content'])) {
-
-                // Création d'une instance pdo
-                $db = Model::getPdo();
-                $adminManager = new AdminUserManager($db);
-                $postManager = new PostManager($db);
-
-                date_default_timezone_set('Europe/Paris');
-
-                // Récupération des données du formulaire
-                $title = htmlspecialchars($_POST['title']);
-                $content = htmlspecialchars($_POST['content']);
-                $date = date('Y-m-d G-H-s');
-                $idAdmin = $adminManager->getUser($_SESSION['login'])->getId();
-                $slug = Utils::slugify($title);
-                $image = htmlspecialchars($_POST['image']);
-
-                $post = new PostEntity(null, $title, $content, $date, $idAdmin, $slug, $image);
-                $postManager->createPost($post);
-
-                header('Location:/admin/index');
-            }
-            $this->render('create', ['idents' => $_SESSION]);
-        }
-
-    }
-
-    public function update($ID_post)
-    {
-
-        // Création d'une instance pdo
-        $db = Model::getPdo();
-        $adminManager = new AdminUserManager($db);
-        $postManager = new PostManager($db);
-
-        if (isset($_SESSION['login'])) {
-            // Récupération des données pour la modification d'un article
-            if (isset($_POST['submit']) && !empty($_POST['title']) && !empty($_POST['content'])) {
-
-                // Modification d'un article
-                $title = htmlspecialchars($_POST['title']);
-                $content = htmlspecialchars($_POST['content']);
-                $date = date('Y-m-d G-H-s');
-                $idAdmin = $idAdmin = $adminManager->getUser($_SESSION['login'])->getId();
-                $slug = Utils::slugify($title);
-                $image = htmlspecialchars($_POST['image']);
-
-                // Objet post à mettre à jour
-                $postToUpdate = new PostEntity($ID_post, $title, $content, $date, $idAdmin, $slug, $image);
-                // Récupération du post à modifier
-                /** @var PostEntity $post */
-
-                $postManager->updatePost($postToUpdate);
-                // Redirection accueil principale
-                header('Location:/admin/index');
-            }
-
-            // A TRANSFORMER EN OBJET
-            // Il faut retrouver l'article à modifier
-            $post = $postManager->getPostById($ID_post);
-
-            $this->render("update", compact("post"));
-
         } else {
             // Sinon, interdire l'accès à la page
             $this->render('errorsession');

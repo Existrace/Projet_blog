@@ -27,4 +27,41 @@ class Comment extends Controller
             header('Location:/post/show/'.$slug);
         }
     }
+
+    public function moderatecomments($ID_comment = null)
+    {
+        // Vérifier si un administrateur est connecté
+        if (isset($_SESSION['login'])) {
+
+            // Création d'une instance pdo
+            $db = Model::getPdo();
+
+            // Récupération des données pour la création d'un article
+            $commentManager = new CommentManager($db);
+            $postManager = new PostManager($db);
+            $comments = $commentManager->getAllComments();
+
+            // Récupération du titre de post du commentaire concerné
+            foreach($comments as $value) {
+                $numPost = $value->getPost();
+                $post = $postManager->getPostById($numPost);
+                $titlePost = $post->getTitle();
+                $value->setPost($titlePost);
+            }
+
+            // Gestion suppression d'un commentaire
+            if ($ID_comment != null) {
+                // Suppression commentaire
+                $commentManager->deleteComment($ID_comment);
+                $this->moderatecomments();
+            }
+
+            $this->render('moderatecomments', ['idents' => $_SESSION, 'comments' => $comments]);
+        } else {
+            // Sinon, interdire l'accès à la page
+            $this->render('errorsession');
+        }
+    }
+
+    // GERER SUPPRESSION COMMENTAIRE DANS UNE METHODE A PART ??
 }
