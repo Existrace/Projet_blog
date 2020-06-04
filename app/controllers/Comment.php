@@ -28,7 +28,10 @@ class Comment extends Controller
         }
     }
 
-    public function moderatecomments($ID_comment = null)
+    /**
+     * Comme une méthode ShowAll
+     */
+    public function moderatecomments()
     {
         // Vérifier si un administrateur est connecté
         if (isset($_SESSION['login'])) {
@@ -49,19 +52,28 @@ class Comment extends Controller
                 $value->setPost($titlePost);
             }
 
-            // Gestion suppression d'un commentaire
-            if ($ID_comment != null) {
-                // Suppression commentaire
-                $commentManager->deleteComment($ID_comment);
-                $this->moderatecomments();
-            }
-
             $this->render('moderatecomments', ['idents' => $_SESSION, 'comments' => $comments]);
         } else {
             // Sinon, interdire l'accès à la page
-            $this->render('errorsession');
+            $this->renderError('errorsession');
         }
     }
 
-    // GERER SUPPRESSION COMMENTAIRE DANS UNE METHODE A PART ??
+    /*
+     * Supprime un commentaire sélectionné
+     */
+    public function deleteComment($ID_comment) {
+
+        // Création d'une instance pdo
+        $db = Model::getPdo();
+
+        $commentManager = new CommentManager($db);
+
+        // Gestion suppression d'un commentaire
+        if ($ID_comment != null) {
+            // Suppression commentaire
+            $commentManager->deleteComment($ID_comment);
+            header('Location:/comment/moderatecomments');
+        }
+    }
 }

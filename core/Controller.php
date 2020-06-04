@@ -29,4 +29,18 @@ abstract class Controller {
         require_once(ROOT.'/app/views/layout/default.html');
 
     }
+
+    public function renderError($error) {
+
+        ob_start();
+
+        // Le dossier où se trouve les vues des erreurs
+        require_once("app/views/error/" . $error.'.html');
+
+        /** @var string $content */
+        $content = ob_get_clean();
+
+        // On fabrique le "template"
+        require_once(ROOT.'/app/views/layout/default.html');
+    }
 }

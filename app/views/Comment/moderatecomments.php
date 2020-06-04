@@ -39,7 +39,7 @@
                                                         ?>
                                                         <hr/>
                                                     </p>
-                                                    <a href="/admin/moderatecomments/<?= $comment->getId() ?>"> Supprimer </a>
+                                                    <a href="/comment/deleteComment/<?= $comment->getId() ?>"> Supprimer </a>
                                                 </div>
 
                                             </div>

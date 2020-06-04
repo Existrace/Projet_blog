@@ -68,13 +68,13 @@ class Router
                     } else {
                         // On envoie le code réponse 404
                         http_response_code(404);
-                        require_once("app/views/404page.php");
+                        require_once("app/views/error/404page.html");
                     }
                 }
             }catch(\Exception $e) {
                 // On envoie le code réponse 404
                 http_response_code(404);
-                require_once("app/views/404page.php");
+                require_once("app/views/error/404page.html");
             }
 
         } else {

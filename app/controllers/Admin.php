@@ -68,7 +68,7 @@ class Admin extends Controller
             $this->render('index', ['idents' => $_SESSION, 'posts' => $posts]);
         } else {
             // Sinon, interdire l'accès à la page
-            $this->render('errorsession');
+            $this->renderError('errorsession');
         }
     }
 

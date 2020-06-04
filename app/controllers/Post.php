@@ -86,6 +86,7 @@ class Post extends Controller {
                 // Récupération des données du formulaire
                 $title = htmlspecialchars($_POST['title']);
                 $content = htmlspecialchars($_POST['content']);
+                $content = strip_tags($content);
                 $date = date('Y-m-d G-H-s');
                 $idAdmin = $adminManager->getUser($_SESSION['login'])->getId();
                 $slug = Utils::slugify($title);
@@ -97,6 +98,9 @@ class Post extends Controller {
                 header('Location:/admin/index');
             }
             $this->render('create', ['idents' => $_SESSION]);
+        }else {
+            // Sinon, interdire l'accès à la page
+            $this->renderError('errorsession');
         }
     }
 
@@ -115,6 +119,7 @@ class Post extends Controller {
                 // Modification d'un article
                 $title = htmlspecialchars($_POST['title']);
                 $content = htmlspecialchars($_POST['content']);
+                $content = strip_tags($content);
                 $date = date('Y-m-d G-H-s');
                 $idAdmin = $idAdmin = $adminManager->getUser($_SESSION['login'])->getId();
                 $slug = Utils::slugify($title);
@@ -138,7 +143,7 @@ class Post extends Controller {
 
         } else {
             // Sinon, interdire l'accès à la page
-            $this->render('errorsession');
+            $this->renderError('errorsession');
         }
     }
 }
